@@ -22,26 +22,6 @@
 
     <servlet-mapping>
         <servlet-name>FlightBookingServlet</servlet-name>
-        <url-pattern>/test</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>FlightBookingServlet</servlet-name>
-        <servlet-class>servlets.User.FlightBookingServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>FlightBookingServlet</servlet-name>
-        <url-pattern>/test</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>FlightBookingServlet</servlet-name>
-        <servlet-class>servlets.User.FlightBookingServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>FlightBookingServlet</servlet-name>
         <url-pattern>/book</url-pattern>
     </servlet-mapping>
 
@@ -73,6 +53,25 @@
     <servlet-mapping>
         <servlet-name>TicketServlet</servlet-name>
         <url-pattern>/ticket</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MainServlet</servlet-name>
+        <servlet-class>servlets.MainServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MainServlet</servlet-name>
+        <url-pattern>/main</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LoginMenu</servlet-name>
+        <jsp-file>/LoginMenu.html</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginMenu</servlet-name>
+        <url-pattern>/main/login</url-pattern>
     </servlet-mapping>
 
 </web-app>
