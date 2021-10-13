@@ -1,39 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        .myClass {
-            color:green;
-        }
-
-    </style>
-    <!-- <meta charset="UTF-8"> -->
-    <title>Addition!</title>
+    <title>
+        Admin Login
+    </title>
 </head>
 <body>
-<!--<form method="post" action="http://localhost:8080/Project-1/login">-->
-<!--    Enter Username: <input name="Username" class="myClass" id="test" type="String" required placeholder="Username" /> <br/>-->
-<!--    Enter Password: <input name="Password" id="test" type="String" required placeholder="Password"/> <br/>-->
-<!--    <input type="submit" value="login">-->
-<!--</form>-->
-
-
-<form method="post" action="http://localhost:8080/Project-1/main">
-    <button type="submit" name = "viewFlights">View Flights</button>
-    <button type="submit" name = "cancel">Cancel Flights</button>
-    <button type="submit" name = "changeFlights">Change Flights</button>
-    <button type="submit" name = "checkIn">Check-in for Flights</button>
-    <button type="submit" name = "adminLogin">Admin Login</button>
-</form>
-
-<form>
-    <label for="country">Country:</label>
-    <select name="country" id="country">
-        <option value="United States">United States</option>
-        <option value="Canada">Canada</option>
-        <option value="Mexico">Mexico</option>
-    </select>
-</form>
-
+    <form method="post" action="http://localhost:8080/Project-1/login">
+        Enter Username: <input name="Username" type="String" required placeholder="Username" /> <br/>
+        Enter Password: <input name="Password" type="String" required placeholder="Password"/> <br/>
+    <input type="submit" value="login">
+    </form>
 </body>
 </html>

@@ -65,13 +65,4 @@
         <url-pattern>/main</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>LoginMenu</servlet-name>
-        <jsp-file>/LoginMenu.html</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>LoginMenu</servlet-name>
-        <url-pattern>/main/login</url-pattern>
-    </servlet-mapping>
-
 </web-app>

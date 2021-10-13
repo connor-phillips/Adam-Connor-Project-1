@@ -30,7 +30,7 @@ public class MainServlet extends HttpServlet {
             out.println("Change Flights");
         } else if (req.getParameter("adminLogin") != null){
             out.println("Admin Login");
-            RequestDispatcher rd = req.getRequestDispatcher("LoginMenu.html");
+            RequestDispatcher rd = req.getRequestDispatcher("login");
             rd.forward(req, resp);
         }
 
