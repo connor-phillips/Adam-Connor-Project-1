@@ -1,7 +1,8 @@
-package servlets;
+package servlets.Admin;
 
 import Models.Admin;
 import Repos.AdminRepo;
+import utils.ConnectionManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +14,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class LoginServlet extends HttpServlet {
-    Connection conn;
+    Connection conn = ConnectionManager.getConnection();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

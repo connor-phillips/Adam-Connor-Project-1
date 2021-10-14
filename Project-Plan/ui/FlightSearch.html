@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Flight Search</title>
@@ -8,29 +8,28 @@
 <h1>
   Searching for Flights
 </h1>
-<form>
+<form method="post" action="http://localhost:8080/Project-1/search">
     <label for="departure">Departure City:</label>
     <select name="departureCity" id="departure">
         <option value="New York">New York</option>
         <option value="Los Angeles">Los Angeles</option>
         <option value="Chicago">Chicago</option>
-    </select>
-</form>
-<form>
+    </select> <br/>
     <label for="arrival">Arrival City:</label>
     <select name="arrivalCity" id="arrival">
         <option value="New York">New York</option>
         <option value="Los Angeles">Los Angeles</option>
         <option value="Chicago">Chicago</option>
-    </select>
-</form>
-<form>
-    <label for="departureTime">Arrival City:</label>
-    <select name="departureTime" id="departureTime">
-        <option value="New York">New York</option>
-        <option value="Los Angeles">Los Angeles</option>
-        <option value="Chicago">Chicago</option>
-    </select>
+    </select> <br/>
+    <label for="date">Departure Date:</label>
+    <select name="departureDate" id="date">
+        <option value="October 13">October 13</option>
+        <option value="October 14">October 14</option>
+        <option value="October 15">October 15</option>
+        <option value="October 16">October 16</option>
+        <option value="October 17">October 17</option>
+    </select> <br/>
+    <button type="submit" name = "search">Search Flights</button>
 </form>
 </body>
 </html>

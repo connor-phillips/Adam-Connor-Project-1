@@ -22,14 +22,23 @@ public class MainServlet extends HttpServlet {
 
         if (req.getParameter("viewFlights") != null){
             out.println("View Flights");
+            RequestDispatcher rd = req.getRequestDispatcher("search");
+            rd.forward(req, resp);
         } else if (req.getParameter("cancel") != null){
             out.println("Cancel Flights");
+//            RequestDispatcher rd = req.getRequestDispatcher("login");
+//            rd.forward(req, resp);
         } else if (req.getParameter("checkIn") != null){
             out.println("Check-in for Flights");
+//            RequestDispatcher rd = req.getRequestDispatcher("login");
+//            rd.forward(req, resp);
         } else if (req.getParameter("changeFlights") != null){
             out.println("Change Flights");
+//            RequestDispatcher rd = req.getRequestDispatcher("login");
+//            rd.forward(req, resp);
         } else if (req.getParameter("adminLogin") != null){
             out.println("Admin Login");
+
             RequestDispatcher rd = req.getRequestDispatcher("login");
             rd.forward(req, resp);
         }

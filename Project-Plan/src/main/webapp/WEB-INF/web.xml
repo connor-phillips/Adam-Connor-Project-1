@@ -37,7 +37,7 @@
 
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>servlets.LoginServlet</servlet-class>
+        <servlet-class>servlets.Admin.LoginServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
