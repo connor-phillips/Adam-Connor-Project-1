@@ -65,4 +65,27 @@
         <url-pattern>/main</url-pattern>
     </servlet-mapping>
 
+    <!-- This was kyle tinkering
+
+    <servlet>
+        <servlet-name>FlightsServlet</servlet-name>
+        <servlet-class>servlets.FlightsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FlightsServlet</servlet-name>
+        <url-pattern>/flights</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FlightServlet</servlet-name>
+        <servlet-class>servlets.FlightServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FlightServlet</servlet-name>
+        <url-pattern>/flights/*</url-pattern>
+    </servlet-mapping>
+     -->
+
 </web-app>
