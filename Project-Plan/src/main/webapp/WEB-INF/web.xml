@@ -27,7 +27,7 @@
 
     <servlet>
         <servlet-name>FlightSearchServlet</servlet-name>
-        <servlet-class>servlets.User.FlightSearchServlet</servlet-class>
+        <servlet-class>servlets.User.FlightsServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
