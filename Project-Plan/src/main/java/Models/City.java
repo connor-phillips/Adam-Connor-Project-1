@@ -1,22 +1,22 @@
 package Models;
 
+import javax.persistence.*;
+
 public class City {
-    private int city_id;
+
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer city_id;
+
+    @Column
     private String city;
+
+    @Column
     private String state;
 
     public City() {
     }
-
-    public City(int city_id) {
-        this.city_id = city_id;
-    }
-
-    public City(int city_id, String city) {
-        this.city_id = city_id;
-        this.city = city;
-    }
-
     public City(int city_id, String city, String state) {
         this.city_id = city_id;
         this.city = city;

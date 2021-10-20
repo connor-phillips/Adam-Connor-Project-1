@@ -5,16 +5,38 @@
     <title>Book Flights</title>
 </head>
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th>Customer ID</th>
-                <th>Flight Num</th>
-                <th>Seat Num</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-            </tr>
-        </thead>
-    </table>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer ID</th>
+                    <th>Flight Num</th>
+                    <th>Seat Num</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+            </thead>
+            <tbody id= "FlightPassengers">
+
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        (async function getPassengers() {
+            let response = await fetch("http://localhost:8080/Project-1/passengers");
+            let json = await response.json();
+
+            let table = document.getElementById("FlightPassengers");
+
+            for(let element of json) {
+                let tr = table.insertRow(-1);
+                for(let key in element) {
+                    let cell = tr.insertCell(-1);
+                    cell.innerHTML =  element[key];
+                }
+            }
+        })();
+    </script>
 </body>
 </html>

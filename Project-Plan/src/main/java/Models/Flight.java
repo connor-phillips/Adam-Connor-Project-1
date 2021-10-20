@@ -1,52 +1,33 @@
 package Models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="flights")
 public class Flight {
-    private int flight_num;
+
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer flight_num;
+
+    @Column
     private String flight_date;
-    private int seat_num;
+
+    @Column
+    private Integer seat_num;
+
+    @Column
     private String departure_city;
+
+    @Column
     private String arrival_city;
+
+    @Column
     private String departure_time;
+
+    @Column
     private String arrival_time;
-
-    public Flight(int flight_num, String flight_date, int seat_num, String departure_city, String arrival_city, String departure_time) {
-        this.flight_num = flight_num;
-        this.flight_date = flight_date;
-        this.seat_num = seat_num;
-        this.departure_city = departure_city;
-        this.arrival_city = arrival_city;
-        this.departure_time = departure_time;
-    }
-
-    public Flight(int flight_num, String flight_date, int seat_num, String departure_city, String arrival_city) {
-        this.flight_num = flight_num;
-        this.flight_date = flight_date;
-        this.seat_num = seat_num;
-        this.departure_city = departure_city;
-        this.arrival_city = arrival_city;
-    }
-
-    public Flight(int flight_num, String flight_date, int seat_num, String departure_city) {
-        this.flight_num = flight_num;
-        this.flight_date = flight_date;
-        this.seat_num = seat_num;
-        this.departure_city = departure_city;
-    }
-
-    public Flight(int flight_num, String flight_date, int seat_num) {
-        this.flight_num = flight_num;
-        this.flight_date = flight_date;
-        this.seat_num = seat_num;
-    }
-
-    public Flight(int flight_num, String flight_date) {
-        this.flight_num = flight_num;
-        this.flight_date = flight_date;
-    }
-
-    public Flight(int flight_num) {
-        this.flight_num = flight_num;
-    }
 
     public Flight(int flight_num, String flight_date, int seat_num, String departure_city, String arrival_city, String departure_time, String arrival_time) {
         this.flight_num = flight_num;

@@ -1,6 +1,6 @@
 package Repos;
 
-import Models.Customer;
+import Models.User;
 import Models.Flight;
 import collections.MyList;
 
@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CustomersRepo implements CrudOperations<Customer>{
+public class CustomersRepo implements CrudOperations<User>{
     Connection conn;
 
     public CustomersRepo(Connection conn) {
@@ -17,10 +17,10 @@ public class CustomersRepo implements CrudOperations<Customer>{
     }
 
     @Override
-    public void save(Customer customer) throws SQLException {
+    public void save(User customer) throws SQLException {
         String sql = "SELECT * CUSTOMERS WHERE customer_id = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, customer.getCustomer_id());
+        ps.setInt(1, customer.getUser_id());
         ResultSet rs = ps.executeQuery();
 
         String sqlInsert = "INSERT INTO users (first_name, last_name) VALUES (?, ?)";
@@ -37,26 +37,26 @@ public class CustomersRepo implements CrudOperations<Customer>{
     }
 
     @Override
-    public Customer getItemByID(int customer_id) throws SQLException {
+    public User getItemByID(int customer_id) throws SQLException {
         String sql = "SELECT * CUSTOMERS WHERE customer_id = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, customer_id);
         ResultSet rs = ps.executeQuery();
 
         if (rs.next()){
-            return new Customer(rs.getInt("customer_id"), rs.getString("first_name"), rs.getString("last_name"));
+            return new User(rs.getInt("customer_id"), rs.getString("first_name"), rs.getString("last_name"));
         } else {
             return null;
         }
     }
 
     @Override
-    public MyList<Customer> getAllItems() throws SQLException {
+    public MyList<User> getAllItems() throws SQLException {
         return null;
     }
 
     @Override
-    public MyList<Customer> getAllItems(Customer customer) throws SQLException {
+    public MyList<User> getAllItems(User customer) throws SQLException {
         return null;
     }
 
