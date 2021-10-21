@@ -1,15 +1,11 @@
 package servlets;
 
 import Models.*;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import services.*;
-import utils.ConnectionManager;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.sql.Connection;
 
 
 public class DependencyLoaderListener implements ServletContextListener {
@@ -27,7 +23,7 @@ public class DependencyLoaderListener implements ServletContextListener {
         Configuration config = new Configuration();
         config.addAnnotatedClass(Flight.class);
         config.addAnnotatedClass(Ticket.class);
-        config.addAnnotatedClass(Customer.class);
+        config.addAnnotatedClass(User.class);
         config.addAnnotatedClass(City.class);
         config.addAnnotatedClass(Admin.class);
         config.addAnnotatedClass(Customers_Flights.class);

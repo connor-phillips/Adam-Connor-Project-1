@@ -1,35 +1,29 @@
 package Models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="admin")
 public class Admin {
-    private int admin_id;
+
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer admin_id;
+
+    @Column
     private String username;
+
+    @Column
     private String password;
+
+    @Column
     private String first_name;
+
+    @Column
     private String last_name;
 
     public Admin() {
-    }
-
-    public Admin(int admin_id) {
-        this.admin_id = admin_id;
-    }
-
-    public Admin(int admin_id, String username) {
-        this.admin_id = admin_id;
-        this.username = username;
-    }
-
-    public Admin(int admin_id, String username, String password) {
-        this.admin_id = admin_id;
-        this.username = username;
-        this.password = password;
-    }
-
-    public Admin(int admin_id, String username, String password, String first_name) {
-        this.admin_id = admin_id;
-        this.username = username;
-        this.password = password;
-        this.first_name = first_name;
     }
 
     public Admin(int admin_id, String username, String password, String first_name, String last_name) {

@@ -1,6 +1,6 @@
 package services;
 
-import Models.Customer;
+import Models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -32,19 +32,19 @@ public class CustomerService {
     public static void init() {
     }
 
-    public static List<Customer> getAllCustomers() {
+    public static List<User> getAllCustomers() {
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Customer> query = builder.createQuery(Customer.class);
-        Root<Customer> root = query.from(Customer.class);
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root<User> root = query.from(User.class);
         query.select(root);
         return session.createQuery(query).getResultList();
     }
 
-    public static Customer getCustomerByID(Customer customer){
+    public static User getCustomerByID(User customer){
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Customer> query = builder.createQuery(Customer.class);
-        Root<Customer> root = query.from(Customer.class);
-        query.select(root).where(builder.equal(root.get("customer_id"), customer.getCustomer_id()));
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root<User> root = query.from(User.class);
+        query.select(root).where(builder.equal(root.get("customer_id"), customer.getUser_id()));
         return session.createQuery(query).getSingleResult();
     }
 }

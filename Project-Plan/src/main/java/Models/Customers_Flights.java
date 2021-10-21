@@ -1,20 +1,25 @@
 package Models;
 
+import javax.persistence.*;
+
+@Entity
+@Table
 public class Customers_Flights {
+
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int junction_id;
+
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn(nullable = false)
     private int customer_id;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(nullable = false)
     private int flight_num;
 
     public Customers_Flights() {
-    }
-
-    public Customers_Flights(int junction_id) {
-        this.junction_id = junction_id;
-    }
-
-    public Customers_Flights(int junction_id, int customer_id) {
-        this.junction_id = junction_id;
-        this.customer_id = customer_id;
     }
 
     public Customers_Flights(int junction_id, int customer_id, int flight_num) {
