@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="Styling.css">
     <meta charset="UTF-8">
     <title>View Tickets</title>
 </head>
 <body>
-    <h1>View Tickets</h1>
-    <form method= "POST" action="http://localhost:8080/Project-1/flights">
-        Enter Customer ID: <input name="customer_id" type="number" required placeholder="Customer ID" /> <br/>
-    <input type="submit" value="Enter">
+    <h1>Cancel A Flight</h1>
+    <!--<form method= "POST" action="http://localhost:8080/Project-1/flights">-->
+    <form>
+        Enter Flight ID: <input name="flight_id" type="number" required placeholder="Flight ID" /> 
+    <button type="submit" onclick=onClickEvent() id="enter_id">Enter</button>
     </form>
+    <p id="warning"></p>
+    <button type="submit" id="yes"></button>
+    <button type="submit" id="no"></button>
+
+    <script>
+        var enter = document.getElementById("enter_id");
+        enter.addEventListener("onclick", onClickEvent);
+        let warning = document.getElementById("warning");
+
+        function onClickEvent(){
+        document.getElementById("warning").innerHTML += "Are You Sure That You Want to Cancel This Flight?<br>";
+        document.getElementById("yes").innerHTML += "Yes";
+        document.getElementById("no").innerHTML += "No";
+        }
+    </script>
 </body>
 </html>

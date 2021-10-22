@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
+    <link rel="stylesheet" href="Styling.css">
+    <style>
+        form {
+            padding: 30px;
+        }
+        
+        button {
+            position:relative; top: 15px;
+        }
+    </style>
     <meta charset="UTF-8">
     <title>Flight Search</title>
 </head>
@@ -8,7 +18,7 @@
 <h1>
   Searching for Flights
 </h1>
-<form method="post" action="http://localhost:8080/Project-1/search">
+<form method="post" action="http://localhost:8080/Project-1/search" class="flightDetails">
     <label for="departure">Departure City:</label>
     <select name="departureCity" id="departure">
         <option value="New York">New York</option>

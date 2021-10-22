@@ -1,6 +1,7 @@
 package servlets.User;
 
 import Models.Flight;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +21,8 @@ public class FlightServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         InputStream requestBody = req.getInputStream();
         Scanner sc = new Scanner(requestBody, StandardCharsets.UTF_8.name());
-        int jsonText = sc.nextInt();
+        String jsonText = sc.next();
+        ObjectMapper mapper = new ObjectMapper();
 
     }
 }
