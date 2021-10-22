@@ -3,6 +3,7 @@ package services;
 import Models.City;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -38,5 +39,15 @@ public class CityService {
         Root<City> root = query.from(City.class);
         query.select(root);
         return session.createQuery(query).getResultList();
+    }
+
+    public static void saveNewCity(City city){
+        Session session = CityService.getSession();
+        City newCity = new City();
+        newCity.setCity(city.getCity());
+        newCity.setState(city.getState());
+        Transaction transaction = session.beginTransaction();
+        session.save(newCity);
+        transaction.commit();
     }
 }

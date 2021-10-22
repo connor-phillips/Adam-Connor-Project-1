@@ -38,9 +38,6 @@ public class MainServlet extends HttpServlet {
 //            rd.forward(req, resp);
         } else if (req.getParameter("adminLogin") != null){
             out.println("Admin Login");
-
-            RequestDispatcher rd = req.getRequestDispatcher("login");
-            rd.forward(req, resp);
         }
 
 

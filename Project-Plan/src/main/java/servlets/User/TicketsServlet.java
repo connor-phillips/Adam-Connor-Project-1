@@ -1,4 +1,6 @@
 package servlets.User;
 
-public class TicketsServlet {
+import javax.servlet.http.HttpServlet;
+
+public class TicketsServlet extends HttpServlet {
 }

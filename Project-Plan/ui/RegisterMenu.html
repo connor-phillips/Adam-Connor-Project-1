@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="Styling.css">
+    <title>
+        Admin Login
+    </title>
+</head>
+<body>
+    <form method="put" action="http://localhost:8080/Project-1/login">
+        First Name: <input name="firstName" type="text" required placeholder="First"/> <br/>
+        Last Name: <input name="lastName" type="text" required placeholder="Last"/> <br/>
+        Username: <input name="username" type="text" required placeholder="username" /> <br/>
+        Password: <input name="password" type="text" required placeholder="password"/> <br/>
+    <button type="submit" id="register">Register</button>
+    </form>
+
+    <button type="navigate" onclick={navigateToViewPage()}>Main Menu</button>
+
+    <script>
+        var register = document.getElementById("register");
+        register.addEventListener("onclick", newAdmin);
+
+        function newAdmin() {
+        alert("A new admin has been created")
+        }
+
+        function navigateToViewPage(){
+            window.location.href = "MainMenu.html"
+        }
+    </script>
+</body>
+</html>

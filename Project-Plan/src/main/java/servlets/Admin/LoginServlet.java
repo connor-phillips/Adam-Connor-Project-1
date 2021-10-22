@@ -1,8 +1,8 @@
 package servlets.Admin;
 
 import Models.Admin;
-import Repos.AdminRepo;
-import utils.ConnectionManager;
+import Models.Flight;
+import services.AdminService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,10 +14,14 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class LoginServlet extends HttpServlet {
-    Connection conn = ConnectionManager.getConnection();
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doGet(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { //Login a registered Admin
         System.out.println("Servlet is Reached");
 
         String username = req.getParameter("Username");
@@ -25,26 +29,15 @@ public class LoginServlet extends HttpServlet {
 
         PrintWriter out = resp.getWriter();
         out.println("Welcome " + username);
+    }
 
-
-//        Admin admin = new Admin();
-//        admin.setUsername(username);
-//        admin.setPassword(password);
-//
-//        AdminRepo adminrepo = new AdminRepo(conn);
-//
-//        PrintWriter out = resp.getWriter();
-//
-//        try {
-//            if (adminrepo.authenticate(admin) == null) {
-//                out.println("This account does not exist");
-//            } else {
-//                admin = adminrepo.authenticate(admin);
-//                out.println("Welcome " + admin.getFirst_name() + " " + admin.getLast_name());
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { //Register a new Admin
+        Admin newAdmin = new Admin();
+        newAdmin.setFirst_name(req.getParameter("firstName"));
+        newAdmin.setLast_name(req.getParameter("lastName"));
+        newAdmin.setUsername(req.getParameter("username"));
+        newAdmin.setPassword(req.getParameter("password"));
+        AdminService.registerAdmin(newAdmin);
     }
 }

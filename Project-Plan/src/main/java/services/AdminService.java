@@ -3,6 +3,7 @@ package services;
 import Models.Admin;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -47,5 +48,17 @@ public class AdminService {
         Root<Admin> root = query.from(Admin.class);
         query.select(root).where(builder.and(builder.equal(root.get("username"), admin.getUsername()), builder.equal(root.get("password"), admin.getPassword())));
         return session.createQuery(query).getSingleResult();
+    }
+
+    public static void registerAdmin(Admin admin){
+        Admin newAdmin = new Admin();
+        newAdmin.setFirst_name(admin.getFirst_name());
+        newAdmin.setLast_name(admin.getLast_name());
+        newAdmin.setUsername(admin.getUsername());
+        newAdmin.setPassword(admin.getPassword());
+        Transaction transaction = session.beginTransaction();
+        session.save(newAdmin);
+        transaction.commit();
+
     }
 }

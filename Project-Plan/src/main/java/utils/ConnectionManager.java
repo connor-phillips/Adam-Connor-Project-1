@@ -37,10 +37,10 @@ public class ConnectionManager {
 
 
                 //This stiff was just used to view the class path URLs
-//                URL[] urls = ((URLClassLoader)cl).getURLs();
-//                for (URL url: urls) {
-//                    System.out.println(url.getFile());
-//                }
+                URL[] urls = ((URLClassLoader)cl).getURLs();
+                for (URL url: urls) {
+                    System.out.println(url.getFile());
+                }
 
                 //This is the old connection.properties file code
 //                Properties props = new Properties();

@@ -1,6 +1,7 @@
 package servlets;
 
 import Models.*;
+import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
 import services.*;
 
@@ -11,6 +12,8 @@ import javax.servlet.ServletContextListener;
 public class DependencyLoaderListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+        Session session = HibernateService.getSession();
+        CityService.setSession(session);
         //Connection conn = ConnectionManager.getConnection();
 //        FlightService.init();
 //        TicketService.init();
@@ -49,5 +52,6 @@ public class DependencyLoaderListener implements ServletContextListener {
 //        AdminService.getSession().close();
 //        CityService.getSession().close();
 //        Customers_FlightsService.getSession().close();
+        HibernateService.closeSession();
     }
 }
