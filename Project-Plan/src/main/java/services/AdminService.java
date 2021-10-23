@@ -50,15 +50,32 @@ public class AdminService {
         return session.createQuery(query).getSingleResult();
     }
 
-    public static void registerAdmin(Admin admin){
-        Admin newAdmin = new Admin();
-        newAdmin.setFirst_name(admin.getFirst_name());
-        newAdmin.setLast_name(admin.getLast_name());
-        newAdmin.setUsername(admin.getUsername());
-        newAdmin.setPassword(admin.getPassword());
-        Transaction transaction = session.beginTransaction();
-        session.save(newAdmin);
-        transaction.commit();
+    public static String registerAdmin(Admin admin){
+        String alert;
+        List<Admin> adminCheck;
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Admin> query = builder.createQuery(Admin.class);
+        Root<Admin> root = query.from(Admin.class);
+        query.select(root).where(builder.equal(root.get("username"), admin.getUsername()));
+        adminCheck = session.createQuery(query).getResultList();
+        if (adminCheck.size() == 0){
+            Transaction transaction = session.beginTransaction();
+            session.save(admin);
+            transaction.commit();
+            alert = "New Admin Created";
+        } else {
+            alert = "This Admin already exists";
+        }
+//        alert = "The Method Works";
+        return alert;
+//        Admin newAdmin = new Admin();
+//        newAdmin.setFirst_name(admin.getFirst_name());
+//        newAdmin.setLast_name(admin.getLast_name());
+//        newAdmin.setUsername(admin.getUsername());
+//        newAdmin.setPassword(admin.getPassword());
+//        Transaction transaction = session.beginTransaction();
+//        session.save(newAdmin);
+//        transaction.commit();
 
     }
 }

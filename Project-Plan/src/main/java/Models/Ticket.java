@@ -19,18 +19,30 @@ public class Ticket {
     @JoinColumn(nullable = false)
     private Integer flight_num;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(nullable = false)
-    private Integer seat_num;
-
-    @Column
-    private Double price;
-
     @Column
     private String first_name;
 
     @Column
     private String last_name;
+
+    @Column
+    private Boolean checkIn;
+
+    @Column
+    private Boolean cancel;
+
+    public Ticket() {
+    }
+
+    public Ticket(Integer ticket_id, Integer customer_id, Integer flight_num, String first_name, String last_name, Boolean checkIn, Boolean cancel) {
+        this.ticket_id = ticket_id;
+        this.customer_id = customer_id;
+        this.flight_num = flight_num;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.checkIn = checkIn;
+        this.cancel = cancel;
+    }
 
     public String getFirst_name() {
         return first_name;
@@ -46,17 +58,6 @@ public class Ticket {
 
     public void setLast_name(String last_name) {
         this.last_name = last_name;
-    }
-
-    public Ticket() {
-    }
-
-    public Ticket(int ticket_id, int customer_id, int flight_num, int seat_num, double price) {
-        this.ticket_id = ticket_id;
-        this.customer_id = customer_id;
-        this.flight_num = flight_num;
-        this.seat_num = seat_num;
-        this.price = price;
     }
 
     public int getTicket_id() {
@@ -83,19 +84,19 @@ public class Ticket {
         this.flight_num = flight_num;
     }
 
-    public int getSeat_num() {
-        return seat_num;
+    public Boolean getCheckIn() {
+        return checkIn;
     }
 
-    public void setSeat_num(int seat_num) {
-        this.seat_num = seat_num;
+    public void setCheckIn(Boolean checkIn) {
+        this.checkIn = checkIn;
     }
 
-    public double getPrice() {
-        return price;
+    public Boolean getCancel() {
+        return cancel;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setCancel(Boolean cancel) {
+        this.cancel = cancel;
     }
 }
