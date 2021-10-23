@@ -9,15 +9,15 @@ public class Customers_Flights {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int junction_id;
+    private Integer junction_id;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(nullable = false)
-    private int customer_id;
+    private Integer customer_id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(nullable = false)
-    private int flight_num;
+    private Integer flight_num;
 
     public Customers_Flights() {
     }

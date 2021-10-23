@@ -28,18 +28,18 @@ public class HibernateService {
             config.setProperty("hibernate.connection.username", System.getProperty("HIBERNATE_CONNECTION_USERNAME"));
             config.setProperty("hibernate.connection.password", System.getProperty("HIBERNATE_CONNECTION_PASSWORD"));
             config.setProperty("hibernate.hbm2ddl.auto", System.getProperty("HIBERNATE_HBM2DDL_AUTO"));
-            config.setProperty("hibernate.connection.autocommit", System.getProperty("HIBERNATE_CONNECTION_AUTOCOMMIT"));
+            //config.setProperty("hibernate.connection.autocommit", System.getProperty("HIBERNATE_CONNECTION_AUTOCOMMIT"));
             config.setProperty("hibernate.show_sql", System.getProperty("HIBERNATE_SHOW_SQL"));
         }
 
 
         //add model classes
-        config.addAnnotatedClass(User.class);
-        config.addAnnotatedClass(Admin.class);
-        config.addAnnotatedClass(Flight.class);
-        config.addAnnotatedClass(Ticket.class);
+//        config.addAnnotatedClass(Flight.class);
+//        config.addAnnotatedClass(User.class);
+//        config.addAnnotatedClass(Customers_Flights.class);
         config.addAnnotatedClass(City.class);
-        config.addAnnotatedClass(Customers_Flights.class);
+//        config.addAnnotatedClass(Ticket.class);
+        config.addAnnotatedClass(Admin.class);
 
         //open session
         session = config.buildSessionFactory().openSession();

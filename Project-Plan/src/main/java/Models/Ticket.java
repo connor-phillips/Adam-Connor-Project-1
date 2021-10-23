@@ -11,7 +11,7 @@ public class Ticket {
     @GeneratedValue
     private Integer ticket_id;
 
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(nullable = false)
     private Integer customer_id;
 
