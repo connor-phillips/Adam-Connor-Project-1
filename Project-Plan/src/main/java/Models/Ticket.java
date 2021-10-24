@@ -11,14 +11,6 @@ public class Ticket {
     @GeneratedValue
     private Integer ticket_id;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(nullable = false)
-    private Integer customer_id;
-
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(nullable = false)
-    private Integer flight_num;
-
     @Column
     private String first_name;
 
@@ -31,17 +23,32 @@ public class Ticket {
     @Column
     private Boolean cancel;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "flight_num")
+    private Flight flight;
+
     public Ticket() {
     }
 
-    public Ticket(Integer ticket_id, Integer customer_id, Integer flight_num, String first_name, String last_name, Boolean checkIn, Boolean cancel) {
-        this.ticket_id = ticket_id;
-        this.customer_id = customer_id;
-        this.flight_num = flight_num;
+    public Ticket(String first_name, String last_name, Boolean checkIn, Boolean cancel, User user, Flight flight) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.checkIn = checkIn;
         this.cancel = cancel;
+        this.user = user;
+        this.flight = flight;
+    }
+
+    public Integer getTicket_id() {
+        return ticket_id;
+    }
+
+    public void setTicket_id(Integer ticket_id) {
+        this.ticket_id = ticket_id;
     }
 
     public String getFirst_name() {
@@ -60,30 +67,6 @@ public class Ticket {
         this.last_name = last_name;
     }
 
-    public int getTicket_id() {
-        return ticket_id;
-    }
-
-    public void setTicket_id(int ticket_id) {
-        this.ticket_id = ticket_id;
-    }
-
-    public int getCustomer_id() {
-        return customer_id;
-    }
-
-    public void setCustomer_id(int customer_id) {
-        this.customer_id = customer_id;
-    }
-
-    public int getFlight_num() {
-        return flight_num;
-    }
-
-    public void setFlight_num(int flight_num) {
-        this.flight_num = flight_num;
-    }
-
     public Boolean getCheckIn() {
         return checkIn;
     }
@@ -98,5 +81,21 @@ public class Ticket {
 
     public void setCancel(Boolean cancel) {
         this.cancel = cancel;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
     }
 }

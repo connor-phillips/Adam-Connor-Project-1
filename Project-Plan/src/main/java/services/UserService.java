@@ -9,7 +9,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-public class CustomerService {
+public class UserService {
     private static SessionFactory sessionFactory;
     private static Session session;
 
@@ -18,7 +18,7 @@ public class CustomerService {
     }
 
     public static void setSessionFactory(SessionFactory sessionFactory) {
-        CustomerService.sessionFactory = sessionFactory;
+        UserService.sessionFactory = sessionFactory;
     }
 
     public static Session getSession() {
@@ -26,7 +26,7 @@ public class CustomerService {
     }
 
     public static void setSession(Session session) {
-        CustomerService.session = session;
+        UserService.session = session;
     }
 
     public static void init() {

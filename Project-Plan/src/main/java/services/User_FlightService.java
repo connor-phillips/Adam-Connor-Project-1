@@ -3,7 +3,7 @@ package services;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-public class Customers_FlightsService {
+public class User_FlightService {
     private static SessionFactory sessionFactory;
     private static Session session;
 
@@ -12,7 +12,7 @@ public class Customers_FlightsService {
     }
 
     public static void setSessionFactory(SessionFactory sessionFactory) {
-        Customers_FlightsService.sessionFactory = sessionFactory;
+        User_FlightService.sessionFactory = sessionFactory;
     }
 
     public static Session getSession() {
@@ -20,7 +20,7 @@ public class Customers_FlightsService {
     }
 
     public static void setSession(Session session) {
-        Customers_FlightsService.session = session;
+        User_FlightService.session = session;
     }
 
     public static void init() {

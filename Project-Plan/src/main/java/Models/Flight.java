@@ -1,6 +1,8 @@
 package Models;
 
 import javax.persistence.*;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Table(name="flights")
@@ -12,97 +14,75 @@ public class Flight {
     private Integer flight_num;
 
     @Column
-    private String flight_date;
-
-//    @Column
-//    private Integer seat_num;
+    private String origin;
 
     @Column
-    private String departure_city;
+    private String destination;
 
     @Column
-    private String arrival_city;
+    private String date;
 
-//    @Column
-//    private String departure_time;
+    @Column
+    private String time;
 
-//    @Column
-//    private String arrival_time;
-
-//    public Flight(int flight_num, String flight_date, int seat_num, String departure_city, String arrival_city, String departure_time, String arrival_time) {
-//        this.flight_num = flight_num;
-//        this.flight_date = flight_date;
-//        this.seat_num = seat_num;
-//        this.departure_city = departure_city;
-//        this.arrival_city = arrival_city;
-//        this.departure_time = departure_time;
-//        this.arrival_time = arrival_time;
-//    }
-
-
-    public Flight(Integer flight_num, String flight_date, String departure_city, String arrival_city) {
-        this.flight_num = flight_num;
-        this.flight_date = flight_date;
-        this.departure_city = departure_city;
-        this.arrival_city = arrival_city;
-    }
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<Ticket> tickets = new LinkedList<>();
 
     public Flight() {
     }
 
-    public int getFlight_num() {
+    public Flight(String origin, String destination, String date, String time) {
+        this.origin = origin;
+        this.destination = destination;
+        this.date = date;
+        this.time = time;
+    }
+
+    public Integer getFlight_num() {
         return flight_num;
     }
 
-    public void setFlight_num(int flight_num) {
+    public void setFlight_num(Integer flight_num) {
         this.flight_num = flight_num;
     }
 
-    public String getFlight_date() {
-        return flight_date;
+    public String getOrigin() {
+        return origin;
     }
 
-    public void setFlight_date(String flight_date) {
-        this.flight_date = flight_date;
+    public void setOrigin(String origin) {
+        this.origin = origin;
     }
 
-//    public int getSeat_num() {
-//        return seat_num;
-//    }
-//
-//    public void setSeat_num(int seat_num) {
-//        this.seat_num = seat_num;
-//    }
-
-    public String getDeparture_city() {
-        return departure_city;
+    public String getDestination() {
+        return destination;
     }
 
-    public void setDeparture_city(String departure_city) {
-        this.departure_city = departure_city;
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 
-    public String getArrival_city() {
-        return arrival_city;
+    public String getDate() {
+        return date;
     }
 
-    public void setArrival_city(String arrival_city) {
-        this.arrival_city = arrival_city;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-//    public String getDeparture_time() {
-//        return departure_time;
-//    }
-//
-//    public void setDeparture_time(String departure_time) {
-//        this.departure_time = departure_time;
-//    }
-//
-//    public String getArrival_time() {
-//        return arrival_time;
-//    }
-//
-//    public void setArrival_time(String arrival_time) {
-//        this.arrival_time = arrival_time;
-//    }
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }
 }

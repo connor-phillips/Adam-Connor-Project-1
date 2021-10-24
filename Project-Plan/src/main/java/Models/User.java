@@ -1,6 +1,8 @@
 package Models;
 
 import javax.persistence.*;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -17,11 +19,24 @@ public class User {
     @Column
     private String last_name;
 
-    public int getUser_id() {
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Ticket> tickets = new LinkedList<>();
+
+    public User(Integer user_id) {
+        this.user_id = user_id;
+    }
+
+    public User(String first_name, String last_name, List<Ticket> tickets) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.tickets = tickets;
+    }
+
+    public Integer getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
 
@@ -41,13 +56,11 @@ public class User {
         this.last_name = last_name;
     }
 
-    public User() {
-
+    public List<Ticket> getTickets() {
+        return tickets;
     }
 
-    public User(int user_id, String first_name, String last_name) {
-        this.user_id = user_id;
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }

@@ -1,6 +1,7 @@
 package services;
 
 import Models.Admin;
+import Models.Flight;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -31,7 +32,22 @@ public class AdminService {
     }
 
     public static void init(){
+    }
 
+    public static void populateAdminTable(){
+        Flight flight1 = new Flight("New York City", "Los Angeles", "October 30", "12 P.M.");
+        Flight flight2 = new Flight("New York City", "Chicago", "November 3", "3 P.M.");
+        Flight flight3 = new Flight("New York City", "Miami", "October 29", "6 P.M.");
+        Flight flight4 = new Flight("New York City", "Houston", "October 26", "10 A.M.");
+        Flight flight5 = new Flight("New York City", "Atlanta", "November 1", "1 P.M.");
+
+        Transaction transaction = session.beginTransaction();
+        session.save(flight1);
+        session.save(flight2);
+        session.save(flight3);
+        session.save(flight4);
+        session.save(flight5);
+        transaction.commit();
     }
 
     public static List<Admin> getAllAdmins() {

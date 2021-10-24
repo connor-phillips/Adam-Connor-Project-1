@@ -34,10 +34,10 @@ public class HibernateService {
 
 
         //add model classes
-//        config.addAnnotatedClass(Flight.class);
-//        config.addAnnotatedClass(User.class);
-//        config.addAnnotatedClass(Customers_Flights.class);
-        config.addAnnotatedClass(City.class);
+        config.addAnnotatedClass(Flight.class);
+        config.addAnnotatedClass(User.class);
+//        config.addAnnotatedClass(User_Flight.class);
+//        config.addAnnotatedClass(City.class);
         config.addAnnotatedClass(Ticket.class);
         config.addAnnotatedClass(Admin.class);
 

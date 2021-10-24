@@ -26,19 +26,18 @@ public class Admin {
     public Admin() {
     }
 
-    public Admin(int admin_id, String username, String password, String first_name, String last_name) {
-        this.admin_id = admin_id;
+    public Admin(String username, String password, String first_name, String last_name) {
         this.username = username;
         this.password = password;
         this.first_name = first_name;
         this.last_name = last_name;
     }
 
-    public int getAdmin_id() {
+    public Integer getAdmin_id() {
         return admin_id;
     }
 
-    public void setAdmin_id(int admin_id) {
+    public void setAdmin_id(Integer admin_id) {
         this.admin_id = admin_id;
     }
 
