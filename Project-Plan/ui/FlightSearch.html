@@ -1,45 +1,67 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+
 <head>
     <link rel="stylesheet" href="Styling.css">
     <style>
         form {
             padding: 30px;
         }
-        
+
         button {
-            position:relative; top: 15px;
+            position: relative;
+            top: 15px;
         }
     </style>
     <meta charset="UTF-8">
     <title>Flight Search</title>
 </head>
+
 <body>
-<h1>
-  Searching for Flights
-</h1>
-<form method="post" action="http://localhost:8080/Project-1/search" class="flightDetails">
-    <label for="departure">Departure City:</label>
-    <select name="departureCity" id="departure">
-        <option value="New York">New York</option>
-        <option value="Los Angeles">Los Angeles</option>
-        <option value="Chicago">Chicago</option>
-    </select> <br/>
-    <label for="arrival">Arrival City:</label>
-    <select name="arrivalCity" id="arrival">
-        <option value="New York">New York</option>
-        <option value="Los Angeles">Los Angeles</option>
-        <option value="Chicago">Chicago</option>
-    </select> <br/>
-    <label for="date">Flight Date:</label>
-    <select name="departureDate" id="date">
-        <option value="October 13">October 13</option>
-        <option value="October 14">October 14</option>
-        <option value="October 15">October 15</option>
-        <option value="October 16">October 16</option>
-        <option value="October 17">October 17</option>
-    </select> <br/>
-    <button type="submit" name = "search">Search Flights</button>
-</form>
+    <h1>
+        Available Flights
+    </h1>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>flight_num</th>
+                    <th>date</th>
+                    <th>destination</th>
+                    <th>origin</th>
+                    <th>time</th>
+                </tr>
+            </thead>
+            <tbody id="flightsTable">
+
+            </tbody>
+        </table>
+    </div>
+    <form action="MainMenu.html">
+        <button type="submit" name="MainMenu">Main Menu</button>
+    </form>
+    <script>
+        (async function retrieveFlights() {
+            let response = await fetch("http://localhost:8080/Project-1/search");
+            let json = await response.json();
+            let table = document.getElementById("flightsTable");
+                for (let element of json) {
+                    let tr = table.insertRow(-1);
+                    console.log(element);
+                    let parsedElement = {
+                        flight_num: element.flight_num,
+                        date: element.date,
+                        destination: element.destination,
+                        origin: element.origin,
+                        time: element.time
+                    }
+                    let tr = table.insertRow(-1);
+                    for(let key in parsedElement) {
+                        let cell = tr.insertCell(-1);
+                        cell.innerHTML = parsedElement[key];
+                }
+            }
+        })();
+    </script>
 </body>
 </html>
