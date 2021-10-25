@@ -24,16 +24,16 @@ public class FlightsServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         resp.getWriter().write(mapper.writeValueAsString(flights));
         resp.setContentType("application/json");
+        resp.setStatus(200);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Flight> flights = new ArrayList<Flight>();
         InputStream requestBody = req.getInputStream();
         Scanner sc = new Scanner(requestBody, StandardCharsets.UTF_8.name());
+        String json = sc.useDelimiter("\\A").next();
         ObjectMapper mapper = new ObjectMapper();
-        resp.getWriter().write(mapper.writeValueAsString(flights));
-        resp.setContentType("application/json");
+        Flight payload = mapper.readValue(json, Flight.class);
     }
 }
 

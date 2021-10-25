@@ -1,5 +1,9 @@
+import utils.FileLogger;
+
 public class ProjectPlan {
     public static void main(String[] args) {
+
+        FileLogger.getFileLogger().console().threshold(0).writeLog("Here is our log file message", 0);
         /*
         *User Interface*
 
