@@ -42,24 +42,15 @@
     </form>
     <script>
         (async function retrieveFlights() {
-            let response = await fetch("http://localhost:8080/Project-1/search");
+            let response = await fetch("http://localhost:8080/Project-Plan/search");
             let json = await response.json();
             let table = document.getElementById("flightsTable");
                 for (let element of json) {
                     let tr = table.insertRow(-1);
-                    console.log(element);
-                    let parsedElement = {
-                        flight_num: element.flight_num,
-                        date: element.date,
-                        destination: element.destination,
-                        origin: element.origin,
-                        time: element.time
-                    }
-                    let tr = table.insertRow(-1);
-                    for(let key in parsedElement) {
+                    for(let key in element) {
                         let cell = tr.insertCell(-1);
-                        cell.innerHTML = parsedElement[key];
-                }
+                        cell.innerHTML = element[key];
+                    }
             }
         })();
     </script>

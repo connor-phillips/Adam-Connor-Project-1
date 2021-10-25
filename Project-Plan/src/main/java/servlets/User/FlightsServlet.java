@@ -22,9 +22,9 @@ public class FlightsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Flight> flights = FlightService.getAllFlights();
         ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(flights);
-        resp.getWriter().print(json);
+        resp.getWriter().write(mapper.writeValueAsString(flights));
         resp.setContentType("application/json");
+        resp.setStatus(200);
     }
 
     @Override
