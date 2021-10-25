@@ -42,7 +42,7 @@
     </form>
     <script>
         (async function retrieveFlights() {
-            let response = await fetch("http://localhost:8080/Project-Plan/search");
+            let response = await fetch("http://localhost:8080/Project-1/search");
             let json = await response.json();
             let table = document.getElementById("flightsTable");
                 for (let element of json) {

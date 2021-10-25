@@ -2,14 +2,19 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="Styling.css">
-    <meta charset="UTF-8">
+    <style>
+        /* table.center{
+            
+        } */
+    </style>
+    <!-- <meta charset="UTF-8"> -->
     <title>View Tickets</title>
 </head>
 <body>
     <h1>View Tickets</h1>
     <form method= "POST" action="http://localhost:8080/Project-1/tickets">
-        Enter User ID: <input name="user_id" type="number" required placeholder="User ID" /> 
-    <button type="submit" id="ticketForm">Enter</button>
+        Enter User ID: <input name="user_id" type="number" id="user_id" required placeholder="User ID" /> 
+    <button type="submit" onclick={retrieveTickets()} id="ticketForm">Enter</button>
     </form>
 
     <br><br><br>
@@ -17,12 +22,12 @@
         <thead>
             <tr>
                 <th>Ticket ID</th>
-                <th>Check-In</th>
-                <th>Cancel</th>
-                <th>First Name</th>
-                <th>Last Name</th>
                 <th>Flight #</th>
                 <th>User ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Check-In</th>
+                <th>Cancel</th>
             </tr>
         </thead>
            <tbody id="TicketTable">
@@ -32,40 +37,91 @@
    </table>
     
     <script>
-        // var submission = document.getElementByID("submitID");
-        // submission.addEventListener("submitID", navigate);
+        // var submission = document.getElementByID("ticketForm");
+        // submission.addEventListener("onclick", retrieveTickets);
 
         // (async function getTickets() {
         //     let response = await fetch("http://localhost:8080/Project-1/tickets");//1 parameter assumes this is a get request
         //     let json = await response.json();
         //     await populateTable(json);
         // })();
-        
-        var form = document.getElementById("ticketForm");
-        form.addEventListener(onclick, poupulateTable(event))
-        
-        
-        function poupulateTable(json){
-            let table = document.getElementById("TicketTable");
 
-            for(let element of json) {
-                let tr = table.insertRow(-1);
-                for(let key in element) {
-                    // if (key == "cancel"){
+        // (async function retrieveTickets() {
+        //     let response = await fetch("http://localhost:8080/Project-1/tickets");
+        //     let json = await response.json();
+        //     let table = document.getElementById("TicketTable");
+        //         for (let element of json) {
+        //             let tr = table.insertRow(-1);
+        //             for(let key in element) {
+        //                 let cell = tr.insertCell(-1);
+        //                 cell.innerHTML = element[key];
+        //             }
+        //     }
+        // })();
+
+         async function retrieveTickets() {
+             let form = new FormData(document.getElementById("user_id"));
+             let response = await fetch("http://localhost:8080/Project-1/tickets", {
+                method: 'POST',
+                body: form 
+             });
+             let json = await response.json();
+             let table = document.getElementById("TicketTable");
+                 for (let element of json) {
+                    // let tr = table.insertRow(-1);
+                    // if (element == 'user'){
                     //     let cell = tr.insertCell(-1);
-                    //     cell.append(`<input type="checkbox" name="cancel">`);
-                    //     cell.append(`<br>`);
-                    // } else if (key == "checkIn"){
+                    //     cell.innerHTML = user[0];
+                    // } else if (element == 'flight'){
+                    //     for (let key of element){
+                    //         let cell = tr.insertCell(-1);
+                    //         cell.innerHTML = flight[0];
+                    //     } 
+                    // } else if (element == 'checkIn' || element == 'cancel') {
                     //     let cell = tr.insertCell(-1);
-                    //     cell.append(`<input type="checkbox" name="checkIn">`);
-                    //     cell.append(`<br>`);
-                    // } else {
-                        let cell = tr.insertCell(-1);
-                        cell.innerHTML =  element[key];
+                    //     var chk = document.createElement('input');
+                    //     var lbl = document.createElement('label');
+
+                    //     chk.setAttribute('type', 'checkbox');
+                    //     chk.setAttribute('value', 'yes');
+                    //     lbl.appendChild(document.createTextNode('Yes'));
+
+                    //     cell.appendChild(chk);
+                    //     cell.appendChild(lbl);
+                    // } 
+                    //  } else {
+                        for (let key in element) {
+                            let cell = tr.insertCell(-1);
+                            cell.innerHTML = element[key];
+                        }
                     }
-                    
                 }
-            }
+        
+        // var form = document.getElementById("ticketForm");
+        // form.addEventListener(onclick, poupulateTable(event))
+        
+        
+        // function poupulateTable(json){
+        //     let table = document.getElementById("TicketTable");
+
+        //     for(let element of json) {
+        //         let tr = table.insertRow(-1);
+        //         for(let key in element) {
+        //             // if (key == "cancel"){
+        //             //     let cell = tr.insertCell(-1);
+        //             //     cell.append(`<input type="checkbox" name="cancel">`);
+        //             //     cell.append(`<br>`);
+        //             // } else if (key == "checkIn"){
+        //             //     let cell = tr.insertCell(-1);
+        //             //     cell.append(`<input type="checkbox" name="checkIn">`);
+        //             //     cell.append(`<br>`);
+        //             // } else {
+        //                 let cell = tr.insertCell(-1);
+        //                 cell.innerHTML =  element[key];
+        //             }
+                    
+        //         }
+        //     }
     </script>
 </body>
 </html>

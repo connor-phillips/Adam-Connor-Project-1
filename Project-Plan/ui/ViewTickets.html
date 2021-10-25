@@ -38,34 +38,40 @@
         // })();
         //http://localhost:8080/to-do-api/toDoItems
         //http://todoapp.us-east-2.elasticbeanstalk.com/toDoItems
-        (async function getTickets() {
-            let response = await fetch("http://localhost:8080/Project-1/tickets");//1 parameter assumes this is a get request
-            let json = await response.json();
-            await populateTable(json);
-        })();
+        (async function retrieveTickets() {
+             let response = await fetch("http://localhost:8080/Project-1/tickets");
+             let json = await response.json();
+             let table = document.getElementById("TicketTable");
+                 for (let element of json) {
+                    let tr = table.insertRow(-1);
+                    if (element == 'user'){
+                        let cell = tr.insertCell(-1);
+                        cell.innerHTML = user[0];
+                    } else if (element == 'flight'){
+                        for (let key of element){
+                            let cell = tr.insertCell(-1);
+                            cell.innerHTML = flight[0];
+                        } 
+                    // } else if (element == 'checkIn' || element == 'cancel') {
+                    //     let cell = tr.insertCell(-1);
+                    //     var chk = document.createElement('input');
+                    //     var lbl = document.createElement('label');
 
-        function populateTable(json){
-            let table = document.getElementById("TicketTable");
+                    //     chk.setAttribute('type', 'checkbox');
+                    //     chk.setAttribute('value', 'yes');
+                    //     lbl.appendChild(document.createTextNode('Yes'));
 
-            for(let element of json) {
-                let tr = table.insertRow(-1);
-                for(let key in element) {
-                    if (key == "cancel"){
-                        let cell = tr.insertCell(-1);
-                        cell.append(`<input type="checkbox" name="cancel">`);
-                        cell.append(`<br>`);
-                    } else if (key == "checkIn"){
-                        let cell = tr.insertCell(-1);
-                        cell.append(`<input type="checkbox" name="checkIn">`);
-                        cell.append(`<br>`);
-                    } else {
-                        let cell = tr.insertCell(-1);
-                        cell.innerHTML =  element[key];
+                    //     cell.appendChild(chk);
+                    //     cell.appendChild(lbl);
+                    // } 
+                     } else {
+                        for(let key in element) {
+                            let cell = tr.insertCell(-1);
+                            cell.innerHTML = element[key];
+                        }
                     }
-                    
                 }
-            }
-        }
+            })();
 
         //function populateTable()
 

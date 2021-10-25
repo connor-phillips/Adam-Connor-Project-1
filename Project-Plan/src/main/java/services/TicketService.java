@@ -72,10 +72,12 @@ public class TicketService {
     }
 
     public static List<Ticket> getTicketsByID(User user){
+        List<Ticket> tickets;
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Ticket> query = builder.createQuery(Ticket.class);
         Root<Ticket> root = query.from(Ticket.class);
         query.select(root).where(builder.equal(root.get("user"), user));
-        return session.createQuery(query).getResultList();
+        tickets = session.createQuery(query).getResultList();
+        return tickets;
     }
 }

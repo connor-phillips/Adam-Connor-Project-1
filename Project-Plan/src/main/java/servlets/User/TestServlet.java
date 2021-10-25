@@ -19,6 +19,7 @@ public class TestServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         resp.getWriter().write(mapper.writeValueAsString(cities));
         resp.setContentType("application/json");
+        resp.setStatus(200);
     }
 
     @Override

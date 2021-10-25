@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -70,7 +71,11 @@ public class UserService {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery(User.class);
         Root<User> root = query.from(User.class);
-        query.select(root).where(builder.equal(root.get("user_id"), user.getUser_id()));
+        try {
+            query.select(root).where(builder.equal(root.get("user_id"), user.getUser_id()));
+        } catch (NoResultException e){
+            return session.createQuery(query).getSingleResult();
+        }
         return session.createQuery(query).getSingleResult();
     }
 }

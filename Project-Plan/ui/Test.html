@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToDo List</title>
+    <title>Cities List</title>
 </head>
 
 <body>
@@ -14,12 +14,12 @@
         <table>
             <thead>
                 <tr>
-                    <th>City ID</th>
+                    <th>CityID</th>
                     <th>City</th>
                     <th>State</th>
                 </tr>
             </thead>
-            <tbody id="ToDoItemTable">
+            <tbody id="CitiesTable">
 
             </tbody>
         </table>
@@ -27,67 +27,18 @@
 
 
     <script>
-        // (function getQueryParameter() {
-        //     let urlParameters = new URLSearchParams(window.location.search);
-        //     console.log("total url params: ", urlParameters);//console.dir?
-        //     console.log("query parameter test: ", urlParameters.get("testParameter"));//value should be "test"
-        //     console.log("query parameter username: ", urlParameters.get("username"));//value should be "kyle"
-        // })();
-        //http://localhost:8080/to-do-api/toDoItems
-        //http://todoapp.us-east-2.elasticbeanstalk.com/toDoItems
-        (async function getCities() {
-            let response = await fetch("http://localhost:8080/Project-1/test");//1 parameter assumes this is a get request
+        (async function retrieveFlights() {
+            let response = await fetch("http://localhost:8080/Project-1/test");
             let json = await response.json();
-            await populateTable(json);
-        })();
-
-        function populateTable(json){
-            let table = document.getElementById("ToDoItemTable");
-
-            for(let element of json) {
-                let tr = table.insertRow(-1);
-                for(let key in element) {
-                    let cell = tr.insertCell(-1);
-                    cell.innerHTML =  element[key];
-                }
+            let table = document.getElementById("CitiesTable");
+                for (let element of json) {
+                    let tr = table.insertRow(-1);
+                    for(let key in element) {
+                        let cell = tr.insertCell(-1);
+                        cell.innerHTML = element[key];
+                    }
             }
-        }
-
-//         [
-//     {
-//         "city_id": 1,
-//         "city": "New York City",
-//         "state": "NY"
-//     },
-//     {
-//         "city_id": 2,
-//         "city": "Chicago",
-//         "state": "IL"
-//     },
-//     {
-//         "city_id": 3,
-//         "city": "Miami",
-//         "state": "FL"
-//     },
-//     {
-//         "city_id": 4,
-//         "city": "Los Angeles",
-//         "state": "CA"
-//     },
-//     {
-//         "city_id": 5,
-//         "city": "Providence",
-//         "state": "RI"
-//     }
-// ]
-
-        //function populateTable()
-
-        // (async function testThingy() {
-        //     let response = await fetch("http://localhost:8080/simple-servlets/things/");
-        //     console.log("Test thingy: ", response.text);
-        // })();
-
+        })();
     </script>
 </body>
 
