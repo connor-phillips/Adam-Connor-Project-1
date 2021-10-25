@@ -11,7 +11,7 @@ public class User {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer user_id;
+    public Integer user_id;
 
     @Column
     private String first_name;
@@ -19,17 +19,20 @@ public class User {
     @Column
     private String last_name;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Ticket> tickets = new LinkedList<>();
+    @OneToOne
+    @JoinColumn(name = "flight_num", referencedColumnName = "flight_num")
+    public Flight flight;
 
-    public User(Integer user_id) {
-        this.user_id = user_id;
+    @OneToMany(cascade = CascadeType.ALL)
+    public List<Ticket> tickets = new LinkedList<>();
+
+    public User() {
     }
 
-    public User(String first_name, String last_name, List<Ticket> tickets) {
+    public User(String first_name, String last_name, Flight flight) {
         this.first_name = first_name;
         this.last_name = last_name;
-        this.tickets = tickets;
+        this.flight = flight;
     }
 
     public Integer getUser_id() {
@@ -62,5 +65,13 @@ public class User {
 
     public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
     }
 }

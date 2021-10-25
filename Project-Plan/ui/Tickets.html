@@ -8,8 +8,64 @@
 <body>
     <h1>View Tickets</h1>
     <form method= "POST" action="http://localhost:8080/Project-1/tickets">
-        Enter Customer ID: <input name="customer_id" type="number" required placeholder="Customer ID" /> 
-    <input type="submit" value="Enter">
+        Enter User ID: <input name="user_id" type="number" required placeholder="User ID" /> 
+    <button type="submit" id="ticketForm">Enter</button>
     </form>
+
+    <br><br><br>
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th>Ticket ID</th>
+                <th>Check-In</th>
+                <th>Cancel</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Flight #</th>
+                <th>User ID</th>
+            </tr>
+        </thead>
+           <tbody id="TicketTable">
+               <form>
+               </form>
+           </tbody>
+   </table>
+    
+    <script>
+        // var submission = document.getElementByID("submitID");
+        // submission.addEventListener("submitID", navigate);
+
+        // (async function getTickets() {
+        //     let response = await fetch("http://localhost:8080/Project-1/tickets");//1 parameter assumes this is a get request
+        //     let json = await response.json();
+        //     await populateTable(json);
+        // })();
+        
+        var form = document.getElementById("ticketForm");
+        form.addEventListener(onclick, poupulateTable(event))
+        
+        
+        function poupulateTable(json){
+            let table = document.getElementById("TicketTable");
+
+            for(let element of json) {
+                let tr = table.insertRow(-1);
+                for(let key in element) {
+                    // if (key == "cancel"){
+                    //     let cell = tr.insertCell(-1);
+                    //     cell.append(`<input type="checkbox" name="cancel">`);
+                    //     cell.append(`<br>`);
+                    // } else if (key == "checkIn"){
+                    //     let cell = tr.insertCell(-1);
+                    //     cell.append(`<input type="checkbox" name="checkIn">`);
+                    //     cell.append(`<br>`);
+                    // } else {
+                        let cell = tr.insertCell(-1);
+                        cell.innerHTML =  element[key];
+                    }
+                    
+                }
+            }
+    </script>
 </body>
 </html>

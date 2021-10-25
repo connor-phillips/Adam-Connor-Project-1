@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.LinkedList;
 import java.util.List;
 
 public class FlightService {
@@ -35,11 +36,17 @@ public class FlightService {
     }
 
     public static void populateFlightsTable(){
-        Flight flight1 = new Flight("New York City", "Los Angeles", "October 30", "12 P.M.");
-        Flight flight2 = new Flight("New York City", "Chicago", "November 3", "3 P.M.");
-        Flight flight3 = new Flight("New York City", "Miami", "October 29", "6 P.M.");
-        Flight flight4 = new Flight("New York City", "Houston", "October 26", "10 A.M.");
-        Flight flight5 = new Flight("New York City", "Atlanta", "November 1", "1 P.M.");
+        List<Flight> flights = new LinkedList<>();
+        Flight flight1 = new Flight("New York City", "Los Angeles", "October 30", "12 PM");
+        Flight flight2 = new Flight("New York City", "Chicago", "November 3", "3 PM");
+        Flight flight3 = new Flight("New York City", "Miami", "October 29", "6 PM");
+        Flight flight4 = new Flight("New York City", "Houston", "October 26", "10 AM");
+        Flight flight5 = new Flight("New York City", "Atlanta", "November 1", "1 PM");
+        flights.add(flight1);
+        flights.add(flight2);
+        flights.add(flight3);
+        flights.add(flight4);
+        flights.add(flight5);
 
         Transaction transaction = session.beginTransaction();
         session.save(flight1);
@@ -48,6 +55,8 @@ public class FlightService {
         session.save(flight4);
         session.save(flight5);
         transaction.commit();
+
+        UserService.populateUserTable(flights);
     }
 
     public static List<Flight> getAllFlights() {

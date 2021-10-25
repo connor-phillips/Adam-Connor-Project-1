@@ -11,7 +11,7 @@ public class Flight {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer flight_num;
+    public Integer flight_num;
 
     @Column
     private String origin;
@@ -26,7 +26,10 @@ public class Flight {
     private String time;
 
     @OneToMany(cascade=CascadeType.ALL)
-    private List<Ticket> tickets = new LinkedList<>();
+    public List<Ticket> tickets = new LinkedList<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    public User user;
 
     public Flight() {
     }

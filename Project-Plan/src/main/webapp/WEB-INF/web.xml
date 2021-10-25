@@ -56,6 +56,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>TicketsServlet</servlet-name>
+        <servlet-class>servlets.User.TicketsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TicketsServlet</servlet-name>
+        <url-pattern>/tickets</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>MainServlet</servlet-name>
         <servlet-class>servlets.MainServlet</servlet-class>
     </servlet>
