@@ -10,6 +10,7 @@
     <form id="idEntry">
         Enter User ID: <input name="user_id" type="number" id="userID" required placeholder="User ID" /> 
     <input type="button" onclick={retrieveTickets()} value="Enter">
+
     </form>
 
     <br><br><br>
@@ -29,11 +30,12 @@
            </tbody>
    </table>
    <br><br><br>
-   <form id="ticketAction" method="POST" action="http://localhost:8080/Project-1/tickets">
-        Enter Ticket ID: <input name="ticket_id" type="number" id="ticketId" required placeholder="Ticket ID"/>
-        Cancel: <input type="checkbox" name="cancel" id="cancel">
+   <!-- <form id="ticketAction" method="POST" action="http://localhost:8080/Project-1/ticket"> -->
+    <form id="ticketForm">
+        Enter Ticket ID: <input name="ticket_id" type="number" id="ticket_id" required placeholder="Ticket ID"/>
         Check-In: <input type="checkbox" name="checkIn" id="checkIn">
-    <input type="submit" value="Submit">
+        Cancel: <input type="checkbox" name="cancel" id="cancel">
+    <input type="button" onclick={updateTickets()} value="Submit">
    </form>
     
     <script>
@@ -101,17 +103,32 @@
         //     });  
         //     navigateToViewPage();      
         // }
+        const ticket_id = document.getElementById("ticket_id");
+        const checkIn = document.getElementById("checkIn");
+        const cancel = document.getElementById("cancel");
 
-        async function ticketAction(){
-            let ticketId = document.getElementbyId("ticketId");
-            let checkIn = document.getElementById("checkIn");
-            let cancel = document.getElementById("cancel");
+        async function updateTickets(){
+            //let ticket_id = document.getElementById("ticket_id");
+            //let checkIn = document.getElementById("checkIn");
+            //let cancel = document.getElementById("cancel");
             let entry = {
-                ticketId: ticketId.value,
-                checkIn: checkIn.value,
-                cancel: cancel.value
+                ticket_id: ticket_id.value,
+                checkIn: checkIn.checked,
+                cancel: cancel.checked
             };
-        }
+
+            console.log(entry);
+            let response = await fetch("http://localhost:8080/Project-1/ticket", {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(entry)
+            });
+            console.log(response.json);
+            let json = await response.json();
+            console.log(json);
+        };
     </script>
 </body>
 </html>

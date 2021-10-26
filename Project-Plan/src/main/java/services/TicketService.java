@@ -80,4 +80,14 @@ public class TicketService {
         tickets = session.createQuery(query).getResultList();
         return tickets;
     }
+
+    public static Ticket updateTicket(Ticket ticket){
+        Transaction transaction = session.beginTransaction();
+        Ticket updatedTicket = session.load(Ticket.class, ticket.getTicket_id());
+        updatedTicket.setCheckIn(ticket.getCheckIn());
+        updatedTicket.setCancel(ticket.getCancel());
+        session.update(updatedTicket);
+        transaction.commit();
+        return updatedTicket;
+    }
 }
