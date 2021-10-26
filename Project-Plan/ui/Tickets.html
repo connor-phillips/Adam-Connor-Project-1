@@ -2,20 +2,14 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="Styling.css">
-    <style>
-        /* table.center{
-            
-        } */
-    </style>
     <!-- <meta charset="UTF-8"> -->
     <title>View Tickets</title>
 </head>
 <body>
     <h1>View Tickets</h1>
     <form id="idEntry">
-    <!-- <form method= "POST" action="http://localhost:8080/Project-1/tickets"> -->
         Enter User ID: <input name="user_id" type="number" id="userID" required placeholder="User ID" /> 
-    <input type="submit" onclick={retrieveTickets()} value="Enter">
+    <input type="button" onclick={retrieveTickets()} value="Enter">
     </form>
 
     <br><br><br>
@@ -35,31 +29,28 @@
            </tbody>
    </table>
    <br><br><br>
-   <form id="checkIn" method="POST" action="http://localhost:8080/Project-1/tickets">
+   <form id="ticketAction" method="POST" action="http://localhost:8080/Project-1/tickets">
         Enter Ticket ID: <input name="ticket_id" type="number" id="ticketId" required placeholder="Ticket ID"/>
-        <input type="submit" value="Check In">
-        <input type="submit" value="Cancel">
+        Cancel: <input type="checkbox" name="cancel" id="cancel">
+        Check-In: <input type="checkbox" name="checkIn" id="checkIn">
+    <input type="submit" value="Submit">
+   </form>
     
     <script>
         async function retrieveTickets() {
-            let submission = document.getElementById("idEntry");
-            let body = {
+            let submission = document.getElementById("userID");
+            submission = submission.value;
+            let entry = {
             user_id: submission
         };
             let response = await fetch("http://localhost:8080/Project-1/tickets", {
             method: 'POST',
-            body: JSON.stringify(body)
+            body: JSON.stringify(entry)
         });
             let json = await response.json();
             let table = document.getElementById("TicketTable");
                 for (let element of json) { 
                 let tr = table.insertRow(-1);
-                /*
-                Here include logic that  "explodes" the "element" of json, 
-                and prepare an object that has only the fields that are 
-                about to be mapped into the table below.
-                */
-                // let {ticket_id, user:{user_id}, flight:{flight_num}, first_name, last_name, checkIn, cancel} = tableEntry;
                 for (let key in element) {
                     let cell = tr.insertCell(-1);
                     if (key === "user"){
@@ -74,16 +65,53 @@
                                 cell.innerHTML = element[key][key2];
                             }
                         }
-                    // } else if (key === "checkIn" || key === "cancel"){
-                    //     let check = cell.createElement("INPUT");
-                    //     cell.setAttribute("type", "checkbox");
-                    // } 
                     } else {
                         cell.innerHTML = element[key];
                     }
                 }
             }
         };
+
+        //  const form = document.getElementById("myForm");
+
+        // form.addEventListener("submit", function(event) {
+        //     event.preventDefault();
+        //     //const { message, complete = false } = event.target.elements;
+        //     console.log("message.value: ", message.value);
+        //     submitForm(message.value);
+        // });
+
+        // async function submitForm(messageValue) {
+        //     let formObject = {
+        //         message: messageValue,
+        //         complete: false
+        //     }
+
+        //     console.log("formObject: ", formObject);
+
+        //     //http://localhost:8080/to-do-api/toDoItems
+        //     //http://todoapp.us-east-2.elasticbeanstalk.com/toDoItems
+        //     let response = await fetch("http://todoapp.us-east-2.elasticbeanstalk.com/toDoItems", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //             "payload-type": "new-item"
+        //         },
+        //         body: JSON.stringify(formObject)
+        //     });  
+        //     navigateToViewPage();      
+        // }
+
+        async function ticketAction(){
+            let ticketId = document.getElementbyId("ticketId");
+            let checkIn = document.getElementById("checkIn");
+            let cancel = document.getElementById("cancel");
+            let entry = {
+                ticketId: ticketId.value,
+                checkIn: checkIn.value,
+                cancel: cancel.value
+            };
+        }
     </script>
 </body>
 </html>

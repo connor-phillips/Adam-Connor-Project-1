@@ -9,7 +9,9 @@ import java.io.IOException;
 public class TicketServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        int ticketId = Integer.parseInt(req.getParameter("ticket_id"));
+        boolean checkIn = Boolean.parseBoolean(req.getParameter("checkIn"));
+        boolean cancel = Boolean.parseBoolean(req.getParameter("cancel"));
     }
 
     @Override
