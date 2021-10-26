@@ -14,71 +14,90 @@
      <thead>
          <tr>
              <th>Ticket ID</th>
-             <th>Check-In</th>
-             <th>Cancel</th>
+             <th>User ID</th>
+             <th>Flight #</th>
              <th>First Name</th>
              <th>Last Name</th>
-             <th>Flight #</th>
-             <th>User ID</th>
+             <th>Check-In</th>
+             <th>Cancel</th>
          </tr>
      </thead>
         <tbody id="TicketTable">
-            <form>
-            </form>
         </tbody>
 </table>
 
 
     <script>
-        // (function getQueryParameter() {
-        //     let urlParameters = new URLSearchParams(window.location.search);
-        //     console.log("total url params: ", urlParameters);//console.dir?
-        //     console.log("query parameter test: ", urlParameters.get("testParameter"));//value should be "test"
-        //     console.log("query parameter username: ", urlParameters.get("username"));//value should be "kyle"
-        // })();
-        //http://localhost:8080/to-do-api/toDoItems
-        //http://todoapp.us-east-2.elasticbeanstalk.com/toDoItems
+        /*
+            {
+        "ticket_id": 1,
+        "user": {
+            "user_id": 2,
+            "first_name": "Spring",
+            "last_name": "Ellington",
+            "flight": {
+                "flight_num": 5,
+                "origin": "New York City",
+                "destination": "Atlanta",
+                "date": "November 1",
+                "time": "1 PM",
+                "tickets": [],
+                "user": null
+            },
+            "tickets": []
+        },
+        "flight": {
+            "flight_num": 5,
+            "origin": "New York City",
+            "destination": "Atlanta",
+            "date": "November 1",
+            "time": "1 PM",
+            "tickets": [],
+            "user": null
+        },
+        "first_name": "Kayla",
+        "last_name": "Cleo",
+        "checkIn": false,
+        "cancel": false
+    },
+        */
+        
         (async function retrieveTickets() {
              let response = await fetch("http://localhost:8080/Project-1/tickets");
              let json = await response.json();
              let table = document.getElementById("TicketTable");
-                 for (let element of json) {
+                 for (let element of json) { 
                     let tr = table.insertRow(-1);
-                    if (element == 'user'){
+                    /*
+                    Here include logic that  "explodes" the "element" of json, 
+                    and prepare an object that has only the fields that are 
+                    about to be mapped into the table below.
+                    */
+                    // let {ticket_id, user:{user_id}, flight:{flight_num}, first_name, last_name, checkIn, cancel} = tableEntry;
+                    for (let key in element) {
                         let cell = tr.insertCell(-1);
-                        cell.innerHTML = user[0];
-                    } else if (element == 'flight'){
-                        for (let key of element){
-                            let cell = tr.insertCell(-1);
-                            cell.innerHTML = flight[0];
-                        } 
-                    // } else if (element == 'checkIn' || element == 'cancel') {
-                    //     let cell = tr.insertCell(-1);
-                    //     var chk = document.createElement('input');
-                    //     var lbl = document.createElement('label');
-
-                    //     chk.setAttribute('type', 'checkbox');
-                    //     chk.setAttribute('value', 'yes');
-                    //     lbl.appendChild(document.createTextNode('Yes'));
-
-                    //     cell.appendChild(chk);
-                    //     cell.appendChild(lbl);
-                    // } 
-                     } else {
-                        for(let key in element) {
-                            let cell = tr.insertCell(-1);
+                        if (key === "user"){
+                            for (let key2 in element[key]){
+                               if (key2 === "user_id"){
+                                   cell.innerHTML = element[key][key2];
+                               }
+                            }
+                        } else if (key === "flight"){
+                            for (let key2 in element[key]){
+                                if (key2 === "flight_num"){
+                                   cell.innerHTML = element[key][key2];
+                               }
+                            }
+                        // } else if (key === "checkIn" || key === "cancel"){
+                        //     let check = cell.createElement("INPUT");
+                        //     cell.setAttribute("type", "checkbox");
+                        // } 
+                        } else {
                             cell.innerHTML = element[key];
                         }
                     }
                 }
             })();
-
-        //function populateTable()
-
-        // (async function testThingy() {
-        //     let response = await fetch("http://localhost:8080/simple-servlets/things/");
-        //     console.log("Test thingy: ", response.text);
-        // })();
 
     </script>
 </body>
