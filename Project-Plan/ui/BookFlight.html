@@ -1,10 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
+    <link rel="stylesheet" href="Styling.css">
+    <style>
+        h1 {
+            padding-bottom: 0px;
+        }
+        button{
+            margin-top: 10px;
+        }
+    </style>
     <meta charset="UTF-8">
     <title>Book Flights</title>
 </head>
 <body>
+    <h1>
+        Book a Flight
+    </h1>
+    <form id = purchase method="post" action="http://localhost:8080/Project-Plan/book">
+        Flight Number: <input name="FlightNum" type="text" required placeholder="Flight Number"/><br/>
+        First Name: <input name ="firstName" type="text" required placeholder="First Name"/><br/>
+        Last Name: <input name = "lastName" type="text" required placeholder="Last Name"/><br/>
+        Number of Tickets: <input name = "numTick" type="text" required placeholder="Ticket Amount"/><br/>
+    <button type="submit" id="book">Purchase Tickets</button>    
+    </form>
+    <script>
+        var purchaseInfo = document.getElementById("book")
 
+        purchaseInfo.addEventListener("submit", function (event) {
+            event.preventDefault();
+            console.log(FlightNum.value);
+            console.log(firstName);
+            console.log(lastName);
+            console.log(numTick.value);
+            PurchaseTicket(FlightNum.value, firstName, lastName, numTick);
+        });
+
+        async function PurchaseTicket(FlightNum, firstName, lastName, numTick){
+            let pTicket = {
+                flightNumber: flightNum,
+                firstName: firstName,
+                lastName: lastName,
+            }
+
+            for (let i = 0; i < numTick; i++) {
+                let response = await fetch("http://localhost:8080/Project-Plan/book", {
+                method: "POST",
+                body: JSON.stringify(formObject)
+            })};
+        }
+    </script>
 </body>
 </html>
