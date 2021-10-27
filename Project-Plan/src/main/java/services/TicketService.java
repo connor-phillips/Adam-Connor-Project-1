@@ -90,4 +90,14 @@ public class TicketService {
         transaction.commit();
         return updatedTicket;
     }
+
+//    Transaction transaction = session.beginTransaction();
+//        Ticket.setfirst_name(fname);
+//        Ticket.setlast_name(lname);
+//        Ticket.setcancel(false);
+//        Ticket.setcheckIn(false);
+//        Ticket.setFlight(FlightService.getFlightById(flight_num))
+//        Ticket.setUser(UserService.createUser(fname, lname))
+//        session.save(Ticket);
+//    transaction.commit();
 }

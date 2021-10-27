@@ -25,6 +25,9 @@ public class Flight {
     @Column
     private String time;
 
+    @Column
+    private Boolean cancelled;
+
     @OneToMany(cascade=CascadeType.ALL)
     public List<Ticket> tickets = new LinkedList<>();
 
@@ -34,11 +37,12 @@ public class Flight {
     public Flight() {
     }
 
-    public Flight(String origin, String destination, String date, String time) {
+    public Flight(String origin, String destination, String date, String time, Boolean cancelled) {
         this.origin = origin;
         this.destination = destination;
         this.date = date;
         this.time = time;
+        this.cancelled = cancelled;
     }
 
     public Integer getFlight_num() {
@@ -87,5 +91,13 @@ public class Flight {
 
     public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    public Boolean getCancelled() {
+        return cancelled;
+    }
+
+    public void setCancelled(Boolean cancelled) {
+        this.cancelled = cancelled;
     }
 }

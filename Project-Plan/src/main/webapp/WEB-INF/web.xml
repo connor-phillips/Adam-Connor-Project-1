@@ -106,4 +106,14 @@
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FlightServlet</servlet-name>
+        <servlet-class>servlets.Admin.FlightServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FlightServlet</servlet-name>
+        <url-pattern>/flight</url-pattern>
+    </servlet-mapping>
 </web-app>

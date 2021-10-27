@@ -120,11 +120,10 @@ public class FlightService {
             alert = "This flight does not exist";
         } else {
             Transaction transaction = session.beginTransaction();
-            Flight updatedFlight = session.load(Flight.class, flight.getFlight_num());
-            updatedFlight.setCancelled(flight.getCancelled());
-            session.save(updatedFlight);
+            flight.setCancelled(true);
+            session.save(flight);
             transaction.commit();
-            alert = "Flight #" + updatedFlight.getFlight_num() + " has been cancelled";
+            alert = "Flight #" + flight.getFlight_num() + " has been cancelled";
         }
         return alert;
     }
