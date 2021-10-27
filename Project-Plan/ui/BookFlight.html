@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+
 <head>
     <link rel="stylesheet" href="Styling.css">
     <style>
         h1 {
             padding-bottom: 0px;
         }
-        button{
+
+        button {
             margin-top: 10px;
         }
     </style>
     <meta charset="UTF-8">
     <title>Book Flights</title>
 </head>
+
 <body>
     <h1>
         Book a Flight
     </h1>
-    <form id = "purchase">
-        Flight Number: <input id="fln" name="FlightNum" type="text" required placeholder="Flight Number"/><br/>
-        First Name: <input id = "fn" name ="firstName" type="text" required placeholder="First Name"/><br/>
-        Last Name: <input id = "ln" name = "lastName" type="text" required placeholder="Last Name"/><br/>
-        Number of Tickets: <input id = "nt" name = "numTick" type="text" required placeholder="Ticket Amount"/><br/>    
-    <input type="button" onclick={Driver()} value="Finish Transaction">   
+    <form id="purchase">
+        Flight Number: <input id="fln" name="FlightNum" type="text" required placeholder="Flight Number" /><br />
+        First Name: <input id="fn" name="firstName" type="text" required placeholder="First Name" /><br />
+        Last Name: <input id="ln" name="lastName" type="text" required placeholder="Last Name" /><br />
+        Number of Tickets: <input id="nt" name="numTick" type="text" required placeholder="Ticket Amount" /><br />
+        <input type="button" onclick={Driver()} value="Finish Transaction">
     </form>
     <script>
-        async function Driver(){
-        const FlightNum = document.getElementById("fln");
-        const firstName = document.getElementById("fn");
-        const lastName = document.getElementById("ln");
-        const numTick = document.getElementById("nt")
-        PurchaseTicket(FlightNum.value, firstName.value, lastName.value, numTick.value);
+        async function Driver() {
+            const FlightNum = document.getElementById("fln");
+            const firstName = document.getElementById("fn");
+            const lastName = document.getElementById("ln");
+            const numTick = document.getElementById("nt")
+            PurchaseTicket(FlightNum.value, firstName.value, lastName.value, numTick.value);
         };
 
-        async function PurchaseTicket(FlightNum, firstName, lastName, numTick){
+        async function PurchaseTicket(FlightNum, firstName, lastName, numTick) {
             let pTicket = {
                 flight_num: FlightNum,
                 first_name: firstName,
@@ -41,14 +44,30 @@
             }
 
             for (let i = 0; i < numTick; i++) {
-                let response = await fetch("http://localhost:8080/Project-Plan/book", {
-                method: "POST",
-                headers:{
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(pTicket)
-            })};
+                if (i == 0) {
+                    let response = await fetch("http://localhost:8080/Project-Plan/book", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Payload-Type": "newUser"
+                        },
+                        body: JSON.stringify(pTicket)
+                    })
+                }
+                else {
+                    let response = await fetch("http://localhost:8080/Project-Plan/book", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Payload-Type": "newTicket"
+                        },
+                        body: JSON.stringify(pTicket)
+                    })
+
+            }
+            };
         }
     </script>
 </body>
+
 </html>

@@ -34,19 +34,29 @@ public class FlightBookingServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp){
-        try{
-            InputStream requestBody = req.getInputStream();
-            Scanner sc = new Scanner(requestBody, StandardCharsets.UTF_8.name());
-            String json = sc.useDelimiter("\\A").next();
-            System.out.println(json);
-            ObjectMapper mapper = new ObjectMapper();
-            Ticket ticket = mapper.readValue(json, Ticket.class);
-            TicketService.purchaseTicket(ticket);
-            resp.setStatus(202);
-
-        } catch(IOException e){
-            FileLogger.getFileLogger().writeLog(e.toString(), 4);
+        InputStream requestBody = req.getInputStream();
+        Scanner sc = new Scanner(requestBody, StandardCharsets.UTF_8.name());
+        String json = sc.useDelimiter("\\A").next();
+        System.out.println(json);
+        ObjectMapper mapper = new ObjectMapper();
+        
+        //Ticket ticket = mapper.readValue(json, Ticket.class);
+        //TicketService.purchaseTicket(ticket);
+        resp.setStatus(202);
+        String header = req.getHeader("Payload-Type");
+        //int flight_num = Integer.parseInt(req.getParameter("flight_num"));
+        //String first_name = req.getParameter("first_name");
+        //String last_name = req.getParameter("last_name");
+        switch(header){
+            case "newUser":
+                TicketService.purchaseTicket(flight_num, first_name, last_name);
+                break;
+            case "newTicket":
+                TicketService.addTicket(flight_num, first_name, last_name);
+                break;
         }
+
+
     }
 
 

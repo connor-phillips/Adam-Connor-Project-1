@@ -35,28 +35,31 @@ public class TicketService {
     public static void init() {
     }
 
-    public static void purchaseTicket(Ticket ticket) {
-        Ticket pTicket = session.get(Ticket.class, ticket.getTicket_id());
-        CriteriaBuilder c = session.getCriteriaBuilder();
-
-        CriteriaQuery<Flight> flight = c.createQuery(Flight.class);
-        Root<Flight> root = flight.from(Flight.class);
-        flight.where(c.equal(root.get("flightNum"), ticket.getFlight()));
-        List<Flight> l = session.createQuery(flight).getResultList();
-        Flight f = session.get(Flight.class, l.get(0).getFlight_num());
-        CriteriaQuery<User> u = c.createQuery(User.class);
-        Root<User> uRoot = u.from(User.class);
-        u.where(c.equal(uRoot.get("firstName"), ticket.getFirst_name()));
-        u.where(c.equal(uRoot.get("lastName"), ticket.getLast_name()));
-        List<User> uL = session.createQuery(u).getResultList();
-        User user = session.get(User.class, uL.get(0).getFirst_name());
-
-        session.flush();
-
+    public static void purchaseTicket(Integer flight_num, String first_name, String last_name) {
+        Ticket ticket = new Ticket();
         Transaction t = session.beginTransaction();
+        ticket.setFirst_name(first_name);
+        ticket.setLast_name(last_name);
+        ticket.setCancel(false);
+        ticket.setCheckIn(false);
+        ticket.setFlight(FlightService.getFlightByID(flight_num));
+        ticket.setUser(UserService.createUser(first_name, last_name));
         session.save(ticket);
         t.commit();
     }
+    public static void addTicket(Integer flight_num, String first_name, String last_name){
+        Ticket ticket = new Ticket();
+        Transaction t = session.beginTransaction();
+        ticket.setFirst_name(first_name);
+        ticket.setLast_name(last_name);
+        ticket.setCancel(false);
+        ticket.setCheckIn(false);
+        ticket.setFlight(FlightService.getFlightByID(flight_num));
+        ticket.setUser(UserService.getCustomerByNames(first_name, last_name));
+        session.save(ticket);
+        t.commit();
+    }
+
     public static List<Ticket> getAllTickets() {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Ticket> query = builder.createQuery(Ticket.class);
