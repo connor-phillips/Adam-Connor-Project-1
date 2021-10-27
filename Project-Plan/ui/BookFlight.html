@@ -17,25 +17,27 @@
     <h1>
         Book a Flight
     </h1>
-    <form id = purchase method="post" action="http://localhost:8080/Project-Plan/book">
-        Flight Number: <input name="FlightNum" type="text" required placeholder="Flight Number"/><br/>
-        First Name: <input name ="firstName" type="text" required placeholder="First Name"/><br/>
-        Last Name: <input name = "lastName" type="text" required placeholder="Last Name"/><br/>
-        Number of Tickets: <input name = "numTick" type="text" required placeholder="Ticket Amount"/><br/>    
-    <button type="submit" id="book">Purchase Tickets</button>    
+    <form id = "purchase">
+        Flight Number: <input id="fln" name="FlightNum" type="text" required placeholder="Flight Number"/><br/>
+        First Name: <input id = "fn" name ="firstName" type="text" required placeholder="First Name"/><br/>
+        Last Name: <input id = "ln" name = "lastName" type="text" required placeholder="Last Name"/><br/>
+        Number of Tickets: <input id = "nt" name = "numTick" type="text" required placeholder="Ticket Amount"/><br/>    
+    <input type="button" onclick={Driver()} value="Finish Transaction">   
     </form>
     <script>
-        const FlightNum = document.getElementById("FlightNum");
-        const firstName = document.getElementById("firstName");
-        const lastName = document.getElementById("lastName");
-        const numTick = document.getElementById("numTick")
-        PurchaseTicket(FlightNum, firstName, lastName, numTick.value);
+        async function Driver(){
+        const FlightNum = document.getElementById("fln");
+        const firstName = document.getElementById("fn");
+        const lastName = document.getElementById("ln");
+        const numTick = document.getElementById("nt")
+        PurchaseTicket(FlightNum.value, firstName.value, lastName.value, numTick.value);
+        };
 
         async function PurchaseTicket(FlightNum, firstName, lastName, numTick){
             let pTicket = {
-                flightNumber: flightNum,
-                firstName: firstName,
-                lastName: lastName,
+                flight_num: FlightNum,
+                first_name: firstName,
+                last_name: lastName,
             }
 
             for (let i = 0; i < numTick; i++) {

@@ -41,7 +41,7 @@ public class FlightBookingServlet extends HttpServlet {
             System.out.println(json);
             ObjectMapper mapper = new ObjectMapper();
             Ticket ticket = mapper.readValue(json, Ticket.class);
-            TicketService.purchaseTicket(ticket, flight);
+            TicketService.purchaseTicket(ticket);
             resp.setStatus(202);
 
         } catch(IOException e){
