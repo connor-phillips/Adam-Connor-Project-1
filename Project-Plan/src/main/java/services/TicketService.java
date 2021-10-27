@@ -35,7 +35,7 @@ public class TicketService {
     public static void init() {
     }
 
-    public static void purchaseTicket(Ticket ticket) {
+    public static void purchaseTicket(Ticket ticket, Flight flight) {
         Ticket pTicket = session.get(Ticket.class, ticket.getTicket_id());
         CriteriaBuilder c = session.getCriteriaBuilder();
 

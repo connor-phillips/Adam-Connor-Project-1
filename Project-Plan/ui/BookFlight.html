@@ -21,20 +21,15 @@
         Flight Number: <input name="FlightNum" type="text" required placeholder="Flight Number"/><br/>
         First Name: <input name ="firstName" type="text" required placeholder="First Name"/><br/>
         Last Name: <input name = "lastName" type="text" required placeholder="Last Name"/><br/>
-        Number of Tickets: <input name = "numTick" type="text" required placeholder="Ticket Amount"/><br/>
+        Number of Tickets: <input name = "numTick" type="text" required placeholder="Ticket Amount"/><br/>    
     <button type="submit" id="book">Purchase Tickets</button>    
     </form>
     <script>
-        var purchaseInfo = document.getElementById("book")
-
-        purchaseInfo.addEventListener("submit", function (event) {
-            event.preventDefault();
-            console.log(FlightNum.value);
-            console.log(firstName);
-            console.log(lastName);
-            console.log(numTick.value);
-            PurchaseTicket(FlightNum.value, firstName, lastName, numTick);
-        });
+        const FlightNum = document.getElementById("FlightNum");
+        const firstName = document.getElementById("firstName");
+        const lastName = document.getElementById("lastName");
+        const numTick = document.getElementById("numTick")
+        PurchaseTicket(FlightNum, firstName, lastName, numTick.value);
 
         async function PurchaseTicket(FlightNum, firstName, lastName, numTick){
             let pTicket = {
@@ -46,7 +41,10 @@
             for (let i = 0; i < numTick; i++) {
                 let response = await fetch("http://localhost:8080/Project-Plan/book", {
                 method: "POST",
-                body: JSON.stringify(formObject)
+                headers:{
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(pTicket)
             })};
         }
     </script>

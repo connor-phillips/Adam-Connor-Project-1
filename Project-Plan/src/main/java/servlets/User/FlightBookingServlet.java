@@ -38,9 +38,10 @@ public class FlightBookingServlet extends HttpServlet {
             InputStream requestBody = req.getInputStream();
             Scanner sc = new Scanner(requestBody, StandardCharsets.UTF_8.name());
             String json = sc.useDelimiter("\\A").next();
+            System.out.println(json);
             ObjectMapper mapper = new ObjectMapper();
             Ticket ticket = mapper.readValue(json, Ticket.class);
-            TicketService.purchaseTicket(ticket);
+            TicketService.purchaseTicket(ticket, flight);
             resp.setStatus(202);
 
         } catch(IOException e){
