@@ -33,7 +33,7 @@ public class TicketServlet extends HttpServlet {
         System.out.println("DEBUG - cancel: " + ticket.getCancel());
         System.out.println("DEBUG - checkIn: " + ticket.getCheckIn());
         Ticket updatedTicket = TicketService.updateTicket(ticket);
-        System.out.println("DEBUG - Ticket: " + ticket.getTicket_id() + " " + ticket.getLast_name() + " " + ticket.getFlight());
+        System.out.println("DEBUG - Ticket: " + updatedTicket.getTicket_id() + " " + updatedTicket.getLast_name() + " " + updatedTicket.getFlight());
         String jsonString = mapper.writeValueAsString(updatedTicket);
         System.out.println("DEBUG - Updated Ticket: " + jsonString);
         resp.getWriter().write(mapper.writeValueAsString(updatedTicket));

@@ -10,7 +10,7 @@
     <form id="idEntry">
         Enter User ID: <input name="user_id" type="number" id="userID" required placeholder="User ID" /> 
     <input type="button" onclick={retrieveTickets()} value="Enter">
-
+    <input type="reset" value="Reset">
     </form>
 
     <br><br><br>
@@ -33,8 +33,12 @@
    <!-- <form id="ticketAction" method="POST" action="http://localhost:8080/Project-1/ticket"> -->
     <form id="ticketForm">
         Enter Ticket ID: <input name="ticket_id" type="number" id="ticket_id" required placeholder="Ticket ID"/>
-        Check-In: <input type="checkbox" name="checkIn" id="checkIn">
-        Cancel: <input type="checkbox" name="cancel" id="cancel">
+        <!-- Check-In: <input type="checkbox" name="checkIn" id="checkIn">
+        Cancel: <input type="checkbox" name="cancel" id="cancel"> -->
+        <label for="checkIn">Check-In</label>
+        <input type="radio" name="ticketAction" id="checkIn">
+        <label for="cancel">Cancel</label>
+        <input type="radio" name="ticketAction" id="cancel">
     <input type="button" onclick={updateTickets()} value="Submit">
    </form>
     
@@ -125,9 +129,15 @@
                 },
                 body: JSON.stringify(entry)
             });
-            console.log(response.json);
+            // console.log(response.json);
             let json = await response.json();
             console.log(json);
+            if (json.checkIn == true){
+                alert("You have checked in for your flight");
+            } else if (json.cancel == true){
+                alert("You have cancelled your ticket");
+            }
+            
         };
     </script>
 </body>

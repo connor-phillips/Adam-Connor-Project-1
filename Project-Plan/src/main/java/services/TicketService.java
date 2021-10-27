@@ -44,7 +44,7 @@ public class TicketService {
         Ticket ticket4 = new Ticket(users.get(1), flights.get(4), "Spring", "Ellington", false, false);
         Ticket ticket5 = new Ticket(users.get(1), flights.get(4),"Quincey", "Sandy", false, false);
         Ticket ticket6 = new Ticket(users.get(0), flights.get(2),"India", "Kiki", false, false);
-        Ticket ticket7 = new Ticket(users.get(0), flights.get(2),"Kal", "scott", false, false);
+        Ticket ticket7 = new Ticket(users.get(0), flights.get(2),"Kal", "Scott", false, false);
         Ticket ticket8 = new Ticket(users.get(0), flights.get(2),"Jami", "Sabrina", false, false);
         Ticket ticket9 = new Ticket(users.get(0), flights.get(2),"Davin", "Glenn", false, false);
         Ticket ticket10 = new Ticket(users.get(0), flights.get(2),"Carl", "Rikki", false, false);
