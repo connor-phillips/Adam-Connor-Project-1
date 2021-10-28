@@ -49,6 +49,7 @@ public class Flight {
         return flight_num;
     }
 
+
     public void setFlight_num(Integer flight_num) {
         this.flight_num = flight_num;
     }

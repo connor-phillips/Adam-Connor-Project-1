@@ -35,6 +35,11 @@ public class User {
         this.flight = flight;
     }
 
+    public User(String first_name, String last_name) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+    }
+
     public Integer getUser_id() {
         return user_id;
     }
