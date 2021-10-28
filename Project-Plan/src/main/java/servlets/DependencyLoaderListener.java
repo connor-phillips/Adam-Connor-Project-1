@@ -1,14 +1,10 @@
 package servlets;
 
-import Models.City;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import services.*;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.io.IOException;
 
 
 public class DependencyLoaderListener implements ServletContextListener {
@@ -21,8 +17,6 @@ public class DependencyLoaderListener implements ServletContextListener {
         TicketService.setSession(session);
         UserService.setSession(session);
         FlightService.setSession(session);
-        CityService.setSession(session);
-        CityService.populateCitiesTable();
 
         //Populates the Flights, Users, and Tickets Tables
         FlightService.populateFlightsTable();

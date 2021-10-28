@@ -34,10 +34,10 @@ public class TicketServlet extends HttpServlet {
 
             Ticket updatedTicket = TicketService.updateTicket(ticket);
             String jsonString = mapper.writeValueAsString(updatedTicket);
-            PrintWriter out = resp.getWriter();
-            int id = updatedTicket.getTicket_id();
-            out.println(id);
-            //resp.getWriter().write(mapper.writeValueAsString(updatedTicket));
+//            PrintWriter out = resp.getWriter();
+//            int id = updatedTicket.getTicket_id();
+//            out.println(id);
+            resp.getWriter().write(mapper.writeValueAsString(updatedTicket));
             resp.setContentType("application/json");
         } catch (NoResultException | IOException e){
             FileLogger.getFileLogger().console().threshold(4).writeLog(e.toString(), 4);

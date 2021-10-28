@@ -38,7 +38,10 @@
         <input type="radio" name="ticketAction" id="cancel">
     <input type="button" onclick={updateTickets()} value="Submit">
    </form>
-    
+   <br>
+   <form action="MainMenu.html">
+    <button type="submit" name="MainMenu">Main Menu</button>
+</form>
     <script>
         async function retrieveTickets() {
             let submission = document.getElementById("userID");
@@ -99,14 +102,14 @@
                 },
                 body: JSON.stringify(entry)
             });
-            // console.log(response.json);
             json = await response.json();
-            if (entry.checkIn == true){
-                alert(`Ticket #${json} has checked in`);
-                window.location.href = "MainMenu.html";
-            } else if (entry.cancel == true){
-                alert(`Ticket #${json} has been cancelled`);
-                window.location.href = "MainMenu.html";
+            console.log(json);
+            if (json.checkIn == true){
+                alert(`Ticket #${json.ticket_id} has checked in`);
+                window.location.href = `Tickets.html`;
+            } else if (json.cancel == true){
+                alert(`Ticket #${json.ticket_id} has been cancelled`);
+                window.location.href = `Tickets.html`;
             }
             
         };
