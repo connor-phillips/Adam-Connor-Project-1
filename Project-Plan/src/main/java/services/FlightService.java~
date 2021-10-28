@@ -75,14 +75,6 @@ public class FlightService {
         return session.createQuery(query).getSingleResult();
     }
 
-    public static Flight getFlightByID(int flight){
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Flight> query = builder.createQuery(Flight.class);
-        Root<Flight> root = query.from(Flight.class);
-        query.select(root).where(builder.equal(root.get("flight_num"), flight));
-        return session.createQuery(query).getSingleResult();
-    }
-
     public static List<Flight> getFlightByDetails(Flight flight){
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Flight> query = builder.createQuery(Flight.class);
@@ -128,11 +120,10 @@ public class FlightService {
             alert = "This flight does not exist";
         } else {
             Transaction transaction = session.beginTransaction();
-            Flight updatedFlight = session.load(Flight.class, flight.getFlight_num());
-            updatedFlight.setCancelled(flight.getCancelled());
-            session.save(updatedFlight);
+            flight.setCancelled(true);
+            session.save(flight);
             transaction.commit();
-            alert = "Flight #" + updatedFlight.getFlight_num() + " has been cancelled";
+            alert = "Flight #" + flight.getFlight_num() + " has been cancelled";
         }
         return alert;
     }
