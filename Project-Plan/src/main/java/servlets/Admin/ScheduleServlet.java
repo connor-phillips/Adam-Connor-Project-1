@@ -3,6 +3,7 @@ package servlets.Admin;
 import Models.Flight;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import services.FlightService;
+import utils.FileLogger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,21 +19,25 @@ public class ScheduleServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Flight flight = new Flight();
-        flight.setDestination(req.getParameter("origin"));
-        flight.setOrigin(req.getParameter("destination"));
-        flight.setDate(req.getParameter("date"));
-        String hour = req.getParameter("hour");
-        String period = req.getParameter("period");
-        String time = hour + " " + period;
-        flight.setTime(time);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException{
+        try {
+            Flight flight = new Flight();
+            flight.setDestination(req.getParameter("origin"));
+            flight.setOrigin(req.getParameter("destination"));
+            flight.setDate(req.getParameter("date"));
+            String hour = req.getParameter("hour");
+            String period = req.getParameter("period");
+            String time = hour + " " + period;
+            flight.setTime(time);
 
-        String alert;
-        alert = FlightService.addFlight(flight);
+            String alert;
+            alert = FlightService.addFlight(flight);
 
-        PrintWriter out = resp.getWriter();
-        out.println(alert);
+            PrintWriter out = resp.getWriter();
+            out.println(alert);
+        } catch(IOException e){
+            FileLogger.getFileLogger().console().threshold(4).writeLog(e.toString(), 4);
+        }
     }
 
 //    @Override

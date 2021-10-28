@@ -1,5 +1,7 @@
 package servlets;
 
+import utils.FileLogger;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,28 +18,31 @@ public class MainServlet extends HttpServlet {
     be sent to the corresponding servlet
      */
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException{
+        try {
+            PrintWriter out = resp.getWriter();
 
-        PrintWriter out = resp.getWriter();
-
-        if (req.getParameter("viewFlights") != null){
-            out.println("View Flights");
-            RequestDispatcher rd = req.getRequestDispatcher("search");
-            rd.forward(req, resp);
-        } else if (req.getParameter("cancel") != null){
-            out.println("Cancel Flights");
+            if (req.getParameter("viewFlights") != null) {
+                out.println("View Flights");
+                RequestDispatcher rd = req.getRequestDispatcher("search");
+                rd.forward(req, resp);
+            } else if (req.getParameter("cancel") != null) {
+                out.println("Cancel Flights");
 //            RequestDispatcher rd = req.getRequestDispatcher("login");
 //            rd.forward(req, resp);
-        } else if (req.getParameter("checkIn") != null){
-            out.println("Check-in for Flights");
+            } else if (req.getParameter("checkIn") != null) {
+                out.println("Check-in for Flights");
 //            RequestDispatcher rd = req.getRequestDispatcher("login");
 //            rd.forward(req, resp);
-        } else if (req.getParameter("changeFlights") != null){
-            out.println("Change Flights");
+            } else if (req.getParameter("changeFlights") != null) {
+                out.println("Change Flights");
 //            RequestDispatcher rd = req.getRequestDispatcher("login");
 //            rd.forward(req, resp);
-        } else if (req.getParameter("adminLogin") != null){
-            out.println("Admin Login");
+            } else if (req.getParameter("adminLogin") != null) {
+                out.println("Admin Login");
+            }
+        } catch(IOException e){
+            FileLogger.getFileLogger().console().threshold(4).writeLog(e.toString(), 4);
         }
 
 

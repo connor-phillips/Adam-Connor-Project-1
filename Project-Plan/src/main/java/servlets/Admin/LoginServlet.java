@@ -3,6 +3,7 @@ package servlets.Admin;
 import Models.Admin;
 import Models.Flight;
 import services.AdminService;
+import utils.FileLogger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,22 +18,30 @@ public class LoginServlet extends HttpServlet {
     Admin admin;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
+        try {
+            super.doGet(req, resp);
+        } catch(IOException e){
+            FileLogger.getFileLogger().console().threshold(4).writeLog(e.toString(), 4);
+        }
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { //Login a registered Admin
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        admin.setUsername(username);
-        admin.setPassword(password);
-        PrintWriter out = resp.getWriter();
-        if (AdminService.authenticate(admin) == null){
-            out.println("This Admin does not exist");
-        } else {
-            admin = AdminService.authenticate(admin);
-            out.println("Welcome: " + admin.getFirst_name());
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException{ //Login a registered Admin
+        try {
+            String username = req.getParameter("username");
+            String password = req.getParameter("password");
+            admin.setUsername(username);
+            admin.setPassword(password);
+            PrintWriter out = resp.getWriter();
+            if (AdminService.authenticate(admin) == null) {
+                out.println("This Admin does not exist");
+            } else {
+                admin = AdminService.authenticate(admin);
+                out.println("Welcome: " + admin.getFirst_name());
+            }
+        } catch(IOException e){
+            FileLogger.getFileLogger().console().threshold(4).writeLog(e.toString(), 4);
         }
 
     }

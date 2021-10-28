@@ -5,6 +5,7 @@ import Models.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import services.TicketService;
 import services.UserService;
+import utils.FileLogger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,25 +20,29 @@ import java.util.Scanner;
 
 public class TicketServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException{
 //        int ticketId = Integer.parseInt(req.getParameter("ticket_id"));
 //        boolean checkIn = Boolean.parseBoolean(req.getParameter("checkIn"));
 //        boolean cancel = Boolean.parseBoolean(req.getParameter("cancel"));
-        InputStream requestBody = req.getInputStream();
-        Scanner sc = new Scanner(requestBody, StandardCharsets.UTF_8.name());
-        String jsonText = sc.useDelimiter("\\A").next();
-        ObjectMapper mapper =  new ObjectMapper();
-        Ticket ticket = mapper.readValue(jsonText, Ticket.class);
+        try {
+            InputStream requestBody = req.getInputStream();
+            Scanner sc = new Scanner(requestBody, StandardCharsets.UTF_8.name());
+            String jsonText = sc.useDelimiter("\\A").next();
+            ObjectMapper mapper = new ObjectMapper();
+            Ticket ticket = mapper.readValue(jsonText, Ticket.class);
 
-        System.out.println("DEBUG - ticketId: " + ticket.getTicket_id());
-        System.out.println("DEBUG - cancel: " + ticket.getCancel());
-        System.out.println("DEBUG - checkIn: " + ticket.getCheckIn());
-        Ticket updatedTicket = TicketService.updateTicket(ticket);
-        System.out.println("DEBUG - Ticket: " + updatedTicket.getTicket_id() + " " + updatedTicket.getLast_name() + " " + updatedTicket.getFlight());
-        String jsonString = mapper.writeValueAsString(updatedTicket);
-        System.out.println("DEBUG - Updated Ticket: " + jsonString);
-        resp.getWriter().write(mapper.writeValueAsString(updatedTicket));
-        resp.setContentType("application/json");
+            System.out.println("DEBUG - ticketId: " + ticket.getTicket_id());
+            System.out.println("DEBUG - cancel: " + ticket.getCancel());
+            System.out.println("DEBUG - checkIn: " + ticket.getCheckIn());
+            Ticket updatedTicket = TicketService.updateTicket(ticket);
+            System.out.println("DEBUG - Ticket: " + updatedTicket.getTicket_id() + " " + updatedTicket.getLast_name() + " " + updatedTicket.getFlight());
+            String jsonString = mapper.writeValueAsString(updatedTicket);
+            System.out.println("DEBUG - Updated Ticket: " + jsonString);
+            resp.getWriter().write(mapper.writeValueAsString(updatedTicket));
+            resp.setContentType("application/json");
+        } catch (IOException e){
+            FileLogger.getFileLogger().console().threshold(4).writeLog(e.toString(), 4);
+        }
     }
 
 
