@@ -37,6 +37,10 @@ public class TicketService {
     public static void init() {
     }
 
+    /**
+     * This method populates the Ticket table with sample Ticket objects
+     * Ten Ticket objects are created and persisted within the database
+     */
     public static void populateTicketTable(List<User> users, List<Flight> flights) {
         Ticket ticket1 = new Ticket(users.get(1), flights.get(4), "Kayla", "Cleo", false, false);
         Ticket ticket2 = new Ticket(users.get(1), flights.get(4), "Ryley", "Saige", false, false);
@@ -63,6 +67,15 @@ public class TicketService {
         transaction.commit();
     }
 
+    /**
+     * This method is used to create a new Ticket object and assign to
+     * a newly created User
+     * This method creates and persists a new Ticket object to the database
+     * as well creates and persists a new User object to the database
+     * @param flight_num
+     * @param first_name
+     * @param last_name
+     */
     public static void purchaseTicket(Integer flight_num, String first_name, String last_name) {
         Ticket ticket = new Ticket();
         ticket.setFirst_name(first_name);
@@ -75,6 +88,17 @@ public class TicketService {
         session.save(ticket);
         t.commit();
     }
+
+    /**
+     * This method is used to create a new Ticket object and assign to
+     * an already persisted User
+     * This method creates and persists a new Ticket object to the database
+     * The User field of the Ticket is assigned to an existing User that is
+     * grabbed from the database using a method within the UserService class
+     * @param flight_num
+     * @param first_name
+     * @param last_name
+     */
     public static void addTicket(Integer flight_num, String first_name, String last_name){
         Ticket ticket = new Ticket();
         ticket.setFirst_name(first_name);
@@ -82,12 +106,17 @@ public class TicketService {
         ticket.setCancel(false);
         ticket.setCheckIn(false);
         ticket.setFlight(FlightService.getFlightByID(flight_num));
-        ticket.setUser(UserService.getCustomerByNames(first_name, last_name));
+        ticket.setUser(UserService.getUserByNames(first_name, last_name));
         Transaction t = session.beginTransaction();
         session.save(ticket);
         t.commit();
     }
 
+    /**
+     * This method grabs all the Ticket objects that are persisted within
+     * the database
+     * @return
+     */
     public static List<Ticket> getAllTickets() {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Ticket> query = builder.createQuery(Ticket.class);
@@ -96,6 +125,12 @@ public class TicketService {
         return session.createQuery(query).getResultList();
     }
 
+    /**
+     * This method grabs all of the Ticket objects that are persisted within
+     * the database and correspond to the specified unique identifier: User Id
+     * @param user
+     * @return
+     */
     public static List<Ticket> getTicketsByID(User user){
         List<Ticket> tickets;
         CriteriaBuilder builder = session.getCriteriaBuilder();
@@ -106,6 +141,12 @@ public class TicketService {
         return tickets;
     }
 
+    /**
+     * This method updates the fields of an existing Ticket object
+     * This method is used when Users choose to Check-In or cancel
+     * their tickets
+     * @param ticket
+     */
     public static Ticket updateTicket(Ticket ticket){
         Transaction transaction = session.beginTransaction();
         Ticket updatedTicket = session.load(Ticket.class, ticket.getTicket_id());

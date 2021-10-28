@@ -55,7 +55,7 @@ public class FlightBookingServlet extends HttpServlet {
                     TicketService.addTicket(flight_num, first_name, last_name);
                     break;
             }
-            User user = UserService.getCustomerByNames(first_name, last_name);
+            User user = UserService.getUserByNames(first_name, last_name);
             PrintWriter out = resp.getWriter();
             int id = user.getUser_id();
             out.println(id);

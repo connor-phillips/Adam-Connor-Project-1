@@ -34,6 +34,10 @@ public class AdminService {
     public static void init(){
     }
 
+    /**
+     * This method is used to populate the Admin Table with sample entries
+     * Two admin entries are created and persisted within the database
+     */
     public static void populateAdminTable(){
         Admin admin1 = new Admin("adixon", "123password", "Adam", "Dixon");
         Admin admin2 = new Admin("cphillips", "456password", "Connor", "Phillips");
@@ -44,6 +48,11 @@ public class AdminService {
         transaction.commit();
     }
 
+    /**
+     * This queries the database and returns a list of all the Admin
+     * entries that exist within the Admin table
+     * @return
+     */
     public static List<Admin> getAllAdmins() {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Admin> query = builder.createQuery(Admin.class);
@@ -52,6 +61,14 @@ public class AdminService {
         return session.createQuery(query).getResultList();
     }
 
+    /**
+     * This method verifies that credentials which an Admin inputs
+     * into the web page correspond to an entry in the database
+     * The database is queried using the first and last name fields
+     * that exist within the Admin object
+     * @param admin
+     * @return
+     */
     public static Admin authenticate(Admin admin){
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Admin> query = builder.createQuery(Admin.class);
@@ -60,6 +77,17 @@ public class AdminService {
         return session.createQuery(query).getSingleResult();
     }
 
+    /**
+     * This method is used to create and persist a new Admin object
+     * into the database
+     * The method queries the database to see if an Admin object with
+     * the given username already exists
+     * If the entry already exists, it will notify the user that the
+     * Admin already exists
+     * Otherwise, the Admin object created and persisted within the database
+     * @param admin
+     * @return
+     */
     public static String registerAdmin(Admin admin){
         String alert;
         List<Admin> adminCheck;
@@ -76,16 +104,6 @@ public class AdminService {
         } else {
             alert = "This Admin already exists";
         }
-//        alert = "The Method Works";
         return alert;
-//        Admin newAdmin = new Admin();
-//        newAdmin.setFirst_name(admin.getFirst_name());
-//        newAdmin.setLast_name(admin.getLast_name());
-//        newAdmin.setUsername(admin.getUsername());
-//        newAdmin.setPassword(admin.getPassword());
-//        Transaction transaction = session.beginTransaction();
-//        session.save(newAdmin);
-//        transaction.commit();
-
     }
 }

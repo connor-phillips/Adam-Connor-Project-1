@@ -6,6 +6,7 @@ import Models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import utils.FileLogger;
 
 import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -37,6 +38,11 @@ public class UserService {
     public static void init() {
     }
 
+    /**
+     * This method populates the User table with sample User objects
+     * Two User objects are created and persisted within the database
+     * @param flights
+     */
     public static void populateUserTable(List<Flight> flights){
         List<User> users = new LinkedList<>();
         User user1 = new User("Jami", "Sabrina", flights.get(2));
@@ -50,15 +56,12 @@ public class UserService {
         transaction.commit();
 
         TicketService.populateTicketTable(users, flights);
-
-        //Uer gets entered once they purchase a ticket
-        //Within the User table:
-        //User ID
-        //First Name
-        //Last Name
-        //Flight Num
     }
 
+    /**
+     * This method queries the database and grabs all the User objects
+     * that are persisted within the User table
+     */
     public static List<User> getAllUsers() {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery(User.class);
@@ -67,6 +70,11 @@ public class UserService {
         return session.createQuery(query).getResultList();
     }
 
+    /**
+     * This method queries the database and grabs the User object
+     * that corresponds to the unique identifier - User ID
+     * @param user
+     */
     public static User getUserByID(User user){
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery(User.class);
@@ -74,12 +82,19 @@ public class UserService {
         try {
             query.select(root).where(builder.equal(root.get("user_id"), user.getUser_id()));
         } catch (NoResultException e){
-            return session.createQuery(query).getSingleResult();
+            FileLogger.getFileLogger().console().threshold(4).writeLog(e.toString(), 4);
         }
         return session.createQuery(query).getSingleResult();
     }
 
-    public static User getCustomerByNames(String first_name, String last_name){
+    /**
+     * This method queries the database for User objects and grabs the User
+     * object that corresponds to the provided parameters - first name and
+     * last name
+     * @param first_name
+     * @param last_name
+     */
+    public static User getUserByNames(String first_name, String last_name){
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery(User.class);
         Root<User> root = query.from(User.class);
@@ -87,8 +102,16 @@ public class UserService {
         return session.createQuery(query).getSingleResult();
     }
 
+    /**
+     * This method queries the database for User objects and grabs the User
+     * object that corresponds to the provided parameters - first name and
+     * last name
+     * If a User object is returned, the User object will be loaded from the database
+     * Otherwise,the created User object will be persisted in the database
+     * @param first_name
+     * @param last_name
+     */
     public static User createUser(String first_name, String last_name){
-        String alert;
         List<User> userCheck;
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery(User.class);
@@ -96,17 +119,13 @@ public class UserService {
         query.select(root).where(builder.and(builder.equal(root.get("first_name"), first_name), builder.equal(root.get("last_name"), last_name)));
         userCheck = session.createQuery(query).getResultList();
         User user = new User(first_name, last_name);
+        Transaction transaction = session.beginTransaction();
         if (userCheck.size() == 0){
-            Transaction transaction = session.beginTransaction();
             session.save(user);
             transaction.commit();
-            alert = "New User Created";
         } else {
-            Transaction transaction = session.beginTransaction();
             session.load(User.class, first_name);
-            alert = "This User already exists";
         }
-//        alert = "The Method Works";
         return user;
     }
 }
