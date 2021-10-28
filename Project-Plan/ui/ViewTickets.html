@@ -63,7 +63,7 @@
         */
         
         (async function retrieveTickets() {
-             let response = await fetch("http://localhost:8080/Project-1/tickets");
+             let response = await fetch("Adamconnorproject1-env.eba-mheey8pz.us-east-2.elasticbeanstalk.com/tickets");
              let json = await response.json();
              let table = document.getElementById("TicketTable");
                  for (let element of json) { 
@@ -88,10 +88,6 @@
                                    cell.innerHTML = element[key][key2];
                                }
                             }
-                        // } else if (key === "checkIn" || key === "cancel"){
-                        //     let check = cell.createElement("INPUT");
-                        //     cell.setAttribute("type", "checkbox");
-                        // } 
                         } else {
                             cell.innerHTML = element[key];
                         }

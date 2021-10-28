@@ -49,7 +49,7 @@
             let entry = {
             user_id: submission
         };
-            let response = await fetch("http://localhost:8080/Project-1/tickets", {
+            let response = await fetch("Adamconnorproject1-env.eba-mheey8pz.us-east-2.elasticbeanstalk.com/tickets", {
             method: 'POST',
             body: JSON.stringify(entry)
         });
@@ -78,35 +78,7 @@
             }
         };
 
-        //  const form = document.getElementById("myForm");
 
-        // form.addEventListener("submit", function(event) {
-        //     event.preventDefault();
-        //     //const { message, complete = false } = event.target.elements;
-        //     console.log("message.value: ", message.value);
-        //     submitForm(message.value);
-        // });
-
-        // async function submitForm(messageValue) {
-        //     let formObject = {
-        //         message: messageValue,
-        //         complete: false
-        //     }
-
-        //     console.log("formObject: ", formObject);
-
-        //     //http://localhost:8080/to-do-api/toDoItems
-        //     //http://todoapp.us-east-2.elasticbeanstalk.com/toDoItems
-        //     let response = await fetch("http://todoapp.us-east-2.elasticbeanstalk.com/toDoItems", {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //             "payload-type": "new-item"
-        //         },
-        //         body: JSON.stringify(formObject)
-        //     });  
-        //     navigateToViewPage();      
-        // }
         const ticket_id = document.getElementById("ticket_id");
         const checkIn = document.getElementById("checkIn");
         const cancel = document.getElementById("cancel");
@@ -122,7 +94,7 @@
             };
 
             console.log(entry);
-            let response = await fetch("http://localhost:8080/Project-1/ticket", {
+            let response = await fetch("Adamconnorproject1-env.eba-mheey8pz.us-east-2.elasticbeanstalk.com/ticket", {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"

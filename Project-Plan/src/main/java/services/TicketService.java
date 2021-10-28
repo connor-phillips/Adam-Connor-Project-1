@@ -37,17 +37,17 @@ public class TicketService {
     public static void init() {
     }
 
-    public static void populateTicketTable(List<User> users, List<Flight> flights){
-        Ticket ticket1 = new Ticket(users.get(1), flights.get(4),"Kayla", "Cleo", false, false);
-        Ticket ticket2 = new Ticket(users.get(1), flights.get(4),"Ryley", "Saige", false, false);
-        Ticket ticket3 = new Ticket(users.get(1), flights.get(4),"Terra", "Allison", false, false);
+    public static void populateTicketTable(List<User> users, List<Flight> flights) {
+        Ticket ticket1 = new Ticket(users.get(1), flights.get(4), "Kayla", "Cleo", false, false);
+        Ticket ticket2 = new Ticket(users.get(1), flights.get(4), "Ryley", "Saige", false, false);
+        Ticket ticket3 = new Ticket(users.get(1), flights.get(4), "Terra", "Allison", false, false);
         Ticket ticket4 = new Ticket(users.get(1), flights.get(4), "Spring", "Ellington", false, false);
-        Ticket ticket5 = new Ticket(users.get(1), flights.get(4),"Quincey", "Sandy", false, false);
-        Ticket ticket6 = new Ticket(users.get(0), flights.get(2),"India", "Kiki", false, false);
-        Ticket ticket7 = new Ticket(users.get(0), flights.get(2),"Kal", "Scott", false, false);
-        Ticket ticket8 = new Ticket(users.get(0), flights.get(2),"Jami", "Sabrina", false, false);
-        Ticket ticket9 = new Ticket(users.get(0), flights.get(2),"Davin", "Glenn", false, false);
-        Ticket ticket10 = new Ticket(users.get(0), flights.get(2),"Carl", "Rikki", false, false);
+        Ticket ticket5 = new Ticket(users.get(1), flights.get(4), "Quincey", "Sandy", false, false);
+        Ticket ticket6 = new Ticket(users.get(0), flights.get(2), "India", "Kiki", false, false);
+        Ticket ticket7 = new Ticket(users.get(0), flights.get(2), "Kal", "Scott", false, false);
+        Ticket ticket8 = new Ticket(users.get(0), flights.get(2), "Jami", "Sabrina", false, false);
+        Ticket ticket9 = new Ticket(users.get(0), flights.get(2), "Davin", "Glenn", false, false);
+        Ticket ticket10 = new Ticket(users.get(0), flights.get(2), "Carl", "Rikki", false, false);
 
         Transaction transaction = session.beginTransaction();
         session.save(ticket1);
@@ -61,7 +61,8 @@ public class TicketService {
         session.save(ticket9);
         session.save(ticket10);
         transaction.commit();
-=======
+    }
+
     public static void purchaseTicket(Integer flight_num, String first_name, String last_name) {
         Ticket ticket = new Ticket();
         ticket.setFirst_name(first_name);
@@ -114,14 +115,4 @@ public class TicketService {
         transaction.commit();
         return updatedTicket;
     }
-
-//    Transaction transaction = session.beginTransaction();
-//        Ticket.setfirst_name(fname);
-//        Ticket.setlast_name(lname);
-//        Ticket.setcancel(false);
-//        Ticket.setcheckIn(false);
-//        Ticket.setFlight(FlightService.getFlightById(flight_num))
-//        Ticket.setUser(UserService.createUser(fname, lname))
-//        session.save(Ticket);
-//    transaction.commit();
 }

@@ -46,7 +46,7 @@
     </form>
     <script>
         (async function retrieveFlights() {
-            let response = await fetch("http://localhost:8080/Project-1/search");
+            let response = await fetch("Adamconnorproject1-env.eba-mheey8pz.us-east-2.elasticbeanstalk.com/search");
             let json = await response.json();
             let table = document.getElementById("flightsTable");
                 for (let element of json) {
