@@ -8,9 +8,11 @@ import Models.*;
 import org.json.JSONObject;
 import services.TicketService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import services.UserService;
 import utils.FileLogger;
 
 
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 import java.util.List;
@@ -44,13 +46,7 @@ public class FlightBookingServlet extends HttpServlet {
             int flight_num = jsonObject.getInt("flight_num");
             String first_name = jsonObject.getString("first_name");
             String last_name = jsonObject.getString("last_name");
-            //Ticket ticket = mapper.readValue(json, Ticket.class);
-            //TicketService.purchaseTicket(ticket);
-            resp.setStatus(202);
             String header = req.getHeader("Payload-Type");
-            //int flight_num = Integer.parseInt(req.getParameter("flight_num"));
-            //String first_name = req.getParameter("first_name");
-            //String last_name = req.getParameter("last_name");
             switch (header) {
                 case "newUser":
                     TicketService.purchaseTicket(flight_num, first_name, last_name);
@@ -59,6 +55,10 @@ public class FlightBookingServlet extends HttpServlet {
                     TicketService.addTicket(flight_num, first_name, last_name);
                     break;
             }
+            User user = UserService.getCustomerByNames(first_name, last_name);
+            PrintWriter out = resp.getWriter();
+            int id = user.getUser_id();
+            out.println(id);
         } catch(IOException e) {
             FileLogger.getFileLogger().console().threshold(4).writeLog(e.toString(), 4);
         }

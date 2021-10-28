@@ -28,42 +28,8 @@
 
 
     <script>
-        /*
-            {
-        "ticket_id": 1,
-        "user": {
-            "user_id": 2,
-            "first_name": "Spring",
-            "last_name": "Ellington",
-            "flight": {
-                "flight_num": 5,
-                "origin": "New York City",
-                "destination": "Atlanta",
-                "date": "November 1",
-                "time": "1 PM",
-                "tickets": [],
-                "user": null
-            },
-            "tickets": []
-        },
-        "flight": {
-            "flight_num": 5,
-            "origin": "New York City",
-            "destination": "Atlanta",
-            "date": "November 1",
-            "time": "1 PM",
-            "tickets": [],
-            "user": null
-        },
-        "first_name": "Kayla",
-        "last_name": "Cleo",
-        "checkIn": false,
-        "cancel": false
-    },
-        */
-        
         (async function retrieveTickets() {
-             let response = await fetch("Adamconnorproject1-env.eba-mheey8pz.us-east-2.elasticbeanstalk.com/tickets");
+             let response = await fetch("http://localhost:8080/Project-Plan/tickets");
              let json = await response.json();
              let table = document.getElementById("TicketTable");
                  for (let element of json) { 

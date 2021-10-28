@@ -18,8 +18,8 @@
         <thead>
             <tr>
                 <th>Ticket ID</th>
-                <th>Flight #</th>
                 <th>User ID</th>
+                <th>Flight #</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Check-In</th>
@@ -30,11 +30,8 @@
            </tbody>
    </table>
    <br><br><br>
-   <!-- <form id="ticketAction" method="POST" action="http://localhost:8080/Project-1/ticket"> -->
     <form id="ticketForm">
         Enter Ticket ID: <input name="ticket_id" type="number" id="ticket_id" required placeholder="Ticket ID"/>
-        <!-- Check-In: <input type="checkbox" name="checkIn" id="checkIn">
-        Cancel: <input type="checkbox" name="cancel" id="cancel"> -->
         <label for="checkIn">Check-In</label>
         <input type="radio" name="ticketAction" id="checkIn">
         <label for="cancel">Cancel</label>
@@ -49,7 +46,7 @@
             let entry = {
             user_id: submission
         };
-            let response = await fetch("Adamconnorproject1-env.eba-mheey8pz.us-east-2.elasticbeanstalk.com/tickets", {
+            let response = await fetch("http://localhost:8080/Project-Plan/tickets", {
             method: 'POST',
             body: JSON.stringify(entry)
         });
@@ -84,6 +81,7 @@
         const cancel = document.getElementById("cancel");
 
         async function updateTickets(){
+            var json;
             //let ticket_id = document.getElementById("ticket_id");
             //let checkIn = document.getElementById("checkIn");
             //let cancel = document.getElementById("cancel");
@@ -94,7 +92,7 @@
             };
 
             console.log(entry);
-            let response = await fetch("Adamconnorproject1-env.eba-mheey8pz.us-east-2.elasticbeanstalk.com/ticket", {
+            let response = await fetch("http://localhost:8080/Project-Plan/ticket", {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"
@@ -102,12 +100,13 @@
                 body: JSON.stringify(entry)
             });
             // console.log(response.json);
-            let json = await response.json();
-            console.log(json);
-            if (json.checkIn == true){
-                alert("You have checked in for your flight");
-            } else if (json.cancel == true){
-                alert("You have cancelled your ticket");
+            json = await response.json();
+            if (entry.checkIn == true){
+                alert(`Ticket #${json} has checked in`);
+                window.location.href = "MainMenu.html";
+            } else if (entry.cancel == true){
+                alert(`Ticket #${json} has been cancelled`);
+                window.location.href = "MainMenu.html";
             }
             
         };
