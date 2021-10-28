@@ -9,7 +9,6 @@ import org.hibernate.Transaction;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.LinkedList;
 import java.util.List;
 
 public class FlightService {
@@ -36,17 +35,11 @@ public class FlightService {
     }
 
     public static void populateFlightsTable(){
-        List<Flight> flights = new LinkedList<>();
-        Flight flight1 = new Flight("New York City", "Los Angeles", "October 30", "12 PM", false);
-        Flight flight2 = new Flight("New York City", "Chicago", "November 3", "3 PM", false);
-        Flight flight3 = new Flight("New York City", "Miami", "October 29", "6 PM", false);
-        Flight flight4 = new Flight("New York City", "Houston", "October 26", "10 AM", false);
-        Flight flight5 = new Flight("New York City", "Atlanta", "November 1", "1 PM", false);
-        flights.add(flight1);
-        flights.add(flight2);
-        flights.add(flight3);
-        flights.add(flight4);
-        flights.add(flight5);
+        Flight flight1 = new Flight("New York City", "Los Angeles", "October 30", "12 P.M.");
+        Flight flight2 = new Flight("New York City", "Chicago", "November 3", "3 P.M.");
+        Flight flight3 = new Flight("New York City", "Miami", "October 29", "6 P.M.");
+        Flight flight4 = new Flight("New York City", "Houston", "October 26", "10 A.M.");
+        Flight flight5 = new Flight("New York City", "Atlanta", "November 1", "1 P.M.");
 
         Transaction transaction = session.beginTransaction();
         session.save(flight1);
@@ -55,8 +48,6 @@ public class FlightService {
         session.save(flight4);
         session.save(flight5);
         transaction.commit();
-
-        UserService.populateUserTable(flights);
     }
 
     public static List<Flight> getAllFlights() {
@@ -106,7 +97,6 @@ public class FlightService {
         flightsCheck = session.createQuery(query).getResultList();
         if (flightsCheck.size() == 0){
             Transaction transaction = session.beginTransaction();
-            flight.setCancelled(false);
             session.save(flight);
             transaction.commit();
             alert = "New Flight Created";
@@ -116,23 +106,18 @@ public class FlightService {
         return alert;
     }
 
-    public static String cancelFlight(Flight flight){
+    public static String cancelFlight(Integer flight_num){
         String alert;
         List<Flight> checkFlight;
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Flight> query = builder.createQuery(Flight.class);
         Root<Flight> root = query.from(Flight.class);
-        query.select(root).where(builder.equal(root.get("flight_num"), flight.getFlight_num()));
+        query.select(root).where(builder.equal(root.get("flight_num"), flight_num));
         checkFlight = session.createQuery(query).getResultList();
         if (checkFlight.size() == 0) {
             alert = "This flight does not exist";
         } else {
-            Transaction transaction = session.beginTransaction();
-            Flight updatedFlight = session.load(Flight.class, flight.getFlight_num());
-            updatedFlight.setCancelled(flight.getCancelled());
-            session.save(updatedFlight);
-            transaction.commit();
-            alert = "Flight #" + updatedFlight.getFlight_num() + " has been cancelled";
+            alert = "This flight has been cancelled";
         }
         return alert;
     }

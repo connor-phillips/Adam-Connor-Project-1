@@ -21,9 +21,9 @@ public class CancelServlet extends HttpServlet {
 
         String alert;
 
-        //alert = FlightService.cancelFlight(flight_num);
+        alert = FlightService.cancelFlight(flight_num);
 
         PrintWriter out = resp.getWriter();
-        //out.println(alert);
+        out.println(alert);
     }
 }

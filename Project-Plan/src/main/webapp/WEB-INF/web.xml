@@ -68,16 +68,6 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>TicketsServlet</servlet-name>
-        <servlet-class>servlets.User.TicketsServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>TicketsServlet</servlet-name>
-        <url-pattern>/tickets</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>MainServlet</servlet-name>
         <servlet-class>servlets.MainServlet</servlet-class>
     </servlet>
@@ -105,15 +95,5 @@
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>FlightServlet</servlet-name>
-        <servlet-class>servlets.Admin.FlightServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>FlightServlet</servlet-name>
-        <url-pattern>/flight</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -19,8 +19,8 @@ public class City {
 
     public City() {
     }
-
-    public City(String city, String state) {
+    public City(int city_id, String city, String state) {
+        this.city_id = city_id;
         this.city = city;
         this.state = state;
     }

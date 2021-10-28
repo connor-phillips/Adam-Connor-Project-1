@@ -35,12 +35,18 @@ public class AdminService {
     }
 
     public static void populateAdminTable(){
-        Admin admin1 = new Admin("adixon", "123password", "Adam", "Dixon");
-        Admin admin2 = new Admin("cphillips", "456password", "Connor", "Phillips");
+        Flight flight1 = new Flight("New York City", "Los Angeles", "October 30", "12 P.M.");
+        Flight flight2 = new Flight("New York City", "Chicago", "November 3", "3 P.M.");
+        Flight flight3 = new Flight("New York City", "Miami", "October 29", "6 P.M.");
+        Flight flight4 = new Flight("New York City", "Houston", "October 26", "10 A.M.");
+        Flight flight5 = new Flight("New York City", "Atlanta", "November 1", "1 P.M.");
 
         Transaction transaction = session.beginTransaction();
-        session.save(admin1);
-        session.save(admin2);
+        session.save(flight1);
+        session.save(flight2);
+        session.save(flight3);
+        session.save(flight4);
+        session.save(flight5);
         transaction.commit();
     }
 

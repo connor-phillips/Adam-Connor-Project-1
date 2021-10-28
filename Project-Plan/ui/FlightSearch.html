@@ -26,7 +26,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>Flight #</th>
+                    <th>Flight_num</th>
                     <th>Date</th>
                     <th>Destination</th>
                     <th>Origin</th>
@@ -46,7 +46,7 @@
     </form>
     <script>
         (async function retrieveFlights() {
-            let response = await fetch("http://localhost:8080/Project-1/search");
+            let response = await fetch("http://localhost:8080/Project-Plan/search");
             let json = await response.json();
             let table = document.getElementById("flightsTable");
                 for (let element of json) {

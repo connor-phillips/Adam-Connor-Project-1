@@ -21,15 +21,7 @@ public class DependencyLoaderListener implements ServletContextListener {
         TicketService.setSession(session);
         UserService.setSession(session);
         FlightService.setSession(session);
-        CityService.setSession(session);
-        CityService.populateCitiesTable();
-
-        //Populates the Flights, Users, and Tickets Tables
         FlightService.populateFlightsTable();
-
-        //Populates the Admin Table
-        AdminService.populateAdminTable();
-//        UserService.populateUserTable();
 //        User_FlightService.setSession(session);
     }
 

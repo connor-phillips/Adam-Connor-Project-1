@@ -11,14 +11,6 @@ public class Ticket {
     @GeneratedValue
     private Integer ticket_id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    public User user;
-
-    @ManyToOne
-    @JoinColumn(name = "flight_num", referencedColumnName = "flight_num")
-    public Flight flight;
-
     @Column
     private String first_name;
 
@@ -31,16 +23,24 @@ public class Ticket {
     @Column
     private Boolean cancel;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "flight_num")
+    private Flight flight;
+
     public Ticket() {
     }
 
-    public Ticket(User user, Flight flight, String first_name, String last_name, Boolean checkIn, Boolean cancel) {
-        this.user = user;
-        this.flight = flight;
+    public Ticket(String first_name, String last_name, Boolean checkIn, Boolean cancel, User user, Flight flight) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.checkIn = checkIn;
         this.cancel = cancel;
+        this.user = user;
+        this.flight = flight;
     }
 
     public Integer getTicket_id() {

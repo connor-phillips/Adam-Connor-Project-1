@@ -2,143 +2,14 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="Styling.css">
-    <!-- <meta charset="UTF-8"> -->
+    <meta charset="UTF-8">
     <title>View Tickets</title>
 </head>
 <body>
     <h1>View Tickets</h1>
-    <form id="idEntry">
-        Enter User ID: <input name="user_id" type="number" id="userID" required placeholder="User ID" /> 
-    <input type="button" onclick={retrieveTickets()} value="Enter">
-    <input type="reset" value="Reset">
+    <form method= "POST" action="http://localhost:8080/Project-1/tickets">
+        Enter Customer ID: <input name="customer_id" type="number" required placeholder="Customer ID" /> 
+    <input type="submit" value="Enter">
     </form>
-
-    <br><br><br>
-    <table class="table table-responsive">
-        <thead>
-            <tr>
-                <th>Ticket ID</th>
-                <th>Flight #</th>
-                <th>User ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Check-In</th>
-                <th>Cancel</th>
-            </tr>
-        </thead>
-           <tbody id="TicketTable">
-           </tbody>
-   </table>
-   <br><br><br>
-   <!-- <form id="ticketAction" method="POST" action="http://localhost:8080/Project-1/ticket"> -->
-    <form id="ticketForm">
-        Enter Ticket ID: <input name="ticket_id" type="number" id="ticket_id" required placeholder="Ticket ID"/>
-        <!-- Check-In: <input type="checkbox" name="checkIn" id="checkIn">
-        Cancel: <input type="checkbox" name="cancel" id="cancel"> -->
-        <label for="checkIn">Check-In</label>
-        <input type="radio" name="ticketAction" id="checkIn">
-        <label for="cancel">Cancel</label>
-        <input type="radio" name="ticketAction" id="cancel">
-    <input type="button" onclick={updateTickets()} value="Submit">
-   </form>
-    
-    <script>
-        async function retrieveTickets() {
-            let submission = document.getElementById("userID");
-            submission = submission.value;
-            let entry = {
-            user_id: submission
-        };
-            let response = await fetch("http://localhost:8080/Project-1/tickets", {
-            method: 'POST',
-            body: JSON.stringify(entry)
-        });
-            let json = await response.json();
-            let table = document.getElementById("TicketTable");
-                for (let element of json) { 
-                let tr = table.insertRow(-1);
-                for (let key in element) {
-                    let cell = tr.insertCell(-1);
-                    if (key === "user"){
-                        for (let key2 in element[key]){
-                            if (key2 === "user_id"){
-                                cell.innerHTML = element[key][key2];
-                            }
-                        }
-                    } else if (key === "flight"){
-                        for (let key2 in element[key]){
-                            if (key2 === "flight_num"){
-                                cell.innerHTML = element[key][key2];
-                            }
-                        }
-                    } else {
-                        cell.innerHTML = element[key];
-                    }
-                }
-            }
-        };
-
-        //  const form = document.getElementById("myForm");
-
-        // form.addEventListener("submit", function(event) {
-        //     event.preventDefault();
-        //     //const { message, complete = false } = event.target.elements;
-        //     console.log("message.value: ", message.value);
-        //     submitForm(message.value);
-        // });
-
-        // async function submitForm(messageValue) {
-        //     let formObject = {
-        //         message: messageValue,
-        //         complete: false
-        //     }
-
-        //     console.log("formObject: ", formObject);
-
-        //     //http://localhost:8080/to-do-api/toDoItems
-        //     //http://todoapp.us-east-2.elasticbeanstalk.com/toDoItems
-        //     let response = await fetch("http://todoapp.us-east-2.elasticbeanstalk.com/toDoItems", {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //             "payload-type": "new-item"
-        //         },
-        //         body: JSON.stringify(formObject)
-        //     });  
-        //     navigateToViewPage();      
-        // }
-        const ticket_id = document.getElementById("ticket_id");
-        const checkIn = document.getElementById("checkIn");
-        const cancel = document.getElementById("cancel");
-
-        async function updateTickets(){
-            //let ticket_id = document.getElementById("ticket_id");
-            //let checkIn = document.getElementById("checkIn");
-            //let cancel = document.getElementById("cancel");
-            let entry = {
-                ticket_id: ticket_id.value,
-                checkIn: checkIn.checked,
-                cancel: cancel.checked
-            };
-
-            console.log(entry);
-            let response = await fetch("http://localhost:8080/Project-1/ticket", {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(entry)
-            });
-            // console.log(response.json);
-            let json = await response.json();
-            console.log(json);
-            if (json.checkIn == true){
-                alert("You have checked in for your flight");
-            } else if (json.cancel == true){
-                alert("You have cancelled your ticket");
-            }
-            
-        };
-    </script>
 </body>
 </html>

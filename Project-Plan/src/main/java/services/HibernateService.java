@@ -37,7 +37,7 @@ public class HibernateService {
         config.addAnnotatedClass(Flight.class);
         config.addAnnotatedClass(User.class);
 //        config.addAnnotatedClass(User_Flight.class);
-        config.addAnnotatedClass(City.class);
+//        config.addAnnotatedClass(City.class);
         config.addAnnotatedClass(Ticket.class);
         config.addAnnotatedClass(Admin.class);
 

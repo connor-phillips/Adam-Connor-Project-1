@@ -33,23 +33,6 @@ public class CityService {
     public static void init() {
     }
 
-    public static void populateCitiesTable(){
-        City city1 = new City("New York City", "NY");
-        City city2 = new City("Chicago", "IL");
-        City city3 = new City("Miami", "FL");
-        City city4 = new City("Los Angeles", "CA");
-        City city5 = new City("Providence", "RI");
-
-        Transaction transaction = session.beginTransaction();
-        session.save(city1);
-        session.save(city2);
-        session.save(city3);
-        session.save(city4);
-        session.save(city5);
-        transaction.commit();
-
-    }
-
     public static List<City> getAllCities() {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<City> query = builder.createQuery(City.class);

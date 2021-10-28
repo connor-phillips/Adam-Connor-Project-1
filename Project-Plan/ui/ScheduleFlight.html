@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Schedule a Flight</h1>
-    <form method="post" action="http://localhost:8080/Project-1/Flight">
+    <form method="post" action="http://localhost:8080/Project-1/Flights">
         Departure City: <input name="origin" type="text" required placeholder="Departure" /> <br/>
         Arrival City: <input name="destination" type="text" required placeholder="Arrival"/> <br/>
         Flight Date: <input name= "date" type= "text" required placeholder= "Date"/> <br/>
@@ -27,11 +27,10 @@
             <option value="12">12</option>
         </select>
         <select name= "period" id= "period">
-            <option value= "am">AM</option>
-            <option value= "pm">PM</option>
+            <option value= "am">A.M.</option>
+            <option value= "pm">P.M.</option>
         </select><br/>
     <button type="submit" name = "search">Schedule Flight</button>
     </form>
-
 </body>
 </html>

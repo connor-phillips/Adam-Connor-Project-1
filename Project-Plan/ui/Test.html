@@ -1,45 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
     <link rel="stylesheet" href="Styling.css">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cities List</title>
+    <title>
+        Admin Login
+    </title>
 </head>
-
 <body>
-    <div>
-        <table>
-            <thead>
-                <tr>
-                    <th>CityID</th>
-                    <th>City</th>
-                    <th>State</th>
-                </tr>
-            </thead>
-            <tbody id="CitiesTable">
-
-            </tbody>
-        </table>
-    </div>
-
-
-    <script>
-        (async function retrieveFlights() {
-            let response = await fetch("http://localhost:8080/Project-1/test");
-            let json = await response.json();
-            let table = document.getElementById("CitiesTable");
-                for (let element of json) {
-                    let tr = table.insertRow(-1);
-                    for(let key in element) {
-                        let cell = tr.insertCell(-1);
-                        cell.innerHTML = element[key];
-                    }
-            }
-        })();
-    </script>
+    <form method="post" action="http://localhost:8080/Project-1/test">
+        Enter City: <input name="city" type="text" required placeholder="city" /> <br/>
+        Enter State: <input name="state" type="text" required placeholder="state"/> <br/>
+    <button type="submit">Create New City</button>
+    </form>
 </body>
-
 </html>

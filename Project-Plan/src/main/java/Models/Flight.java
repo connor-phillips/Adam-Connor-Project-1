@@ -11,7 +11,7 @@ public class Flight {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer flight_num;
+    private Integer flight_num;
 
     @Column
     private String origin;
@@ -25,24 +25,17 @@ public class Flight {
     @Column
     private String time;
 
-    @Column
-    private Boolean cancelled;
-
     @OneToMany(cascade=CascadeType.ALL)
-    public List<Ticket> tickets = new LinkedList<>();
-
-    @OneToOne(cascade = CascadeType.ALL)
-    public User user;
+    private List<Ticket> tickets = new LinkedList<>();
 
     public Flight() {
     }
 
-    public Flight(String origin, String destination, String date, String time, Boolean cancelled) {
+    public Flight(String origin, String destination, String date, String time) {
         this.origin = origin;
         this.destination = destination;
         this.date = date;
         this.time = time;
-        this.cancelled = cancelled;
     }
 
     public Integer getFlight_num() {
@@ -92,13 +85,5 @@ public class Flight {
 
     public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
-    }
-
-    public Boolean getCancelled() {
-        return cancelled;
-    }
-
-    public void setCancelled(Boolean cancelled) {
-        this.cancelled = cancelled;
     }
 }
