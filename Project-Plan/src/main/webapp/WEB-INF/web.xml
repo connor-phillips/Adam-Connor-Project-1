@@ -78,16 +78,6 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>MainServlet</servlet-name>
-        <servlet-class>servlets.MainServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>MainServlet</servlet-name>
-        <url-pattern>/main</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>servlets.Admin.RegisterServlet</servlet-class>
     </servlet>
