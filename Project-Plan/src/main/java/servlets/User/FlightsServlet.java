@@ -17,8 +17,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This is the user Flights Servlet. This servlet searches the flights table for all the currently scheduled flights
+ * and sends it back to the webpage to be put into a table and displayed to the user when they are searching
+ * for flights.
+ */
+
 public class FlightsServlet extends HttpServlet {
 
+    //Get method to retrieve the flights from the flight table and send them back as an HTTP response
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
         try {

@@ -21,6 +21,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This is the Tickets Servlet. This servlet retrieves the user id from the POST request and sends the user back
+ * all tickets tied to their user id. It is then put into a table and presented to the User.
+ */
+
 public class TicketsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException{
@@ -50,6 +55,8 @@ public class TicketsServlet extends HttpServlet {
 
             List<Ticket> tickets;
             tickets = TicketService.getTicketsByID(user);
+
+            //Checks whether the user has any tickets linked to their Id
 
             if (tickets.size() == 0) {
                 PrintWriter out = resp.getWriter();

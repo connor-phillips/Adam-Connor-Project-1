@@ -18,6 +18,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This is the Flight Servlet which would have been used to cancel and create flights for the admin. The user stories
+ * were not finished in time so this servlet does nothing
+ */
+
 public class FlightServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

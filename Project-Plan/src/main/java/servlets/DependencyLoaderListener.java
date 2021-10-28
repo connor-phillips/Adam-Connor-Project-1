@@ -6,6 +6,9 @@ import services.*;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+/**
+ * Dependency Loader Listener to create and populate our tables in hibernate
+ */
 
 public class DependencyLoaderListener implements ServletContextListener {
 

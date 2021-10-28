@@ -14,6 +14,12 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+/**
+ * This is the Admin Login Servlet. This servlet will request a username and password and authenticate them, ensuring
+ * that they exist in our Admin table. If they are authenticated they would be logged in, if not they would be prompted
+ * with an error.
+ */
+
 public class LoginServlet extends HttpServlet {
     Admin admin;
 
@@ -27,7 +33,10 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException{ //Login a registered Admin
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException{
+        /**
+         * Post method to log in a registered admin
+         */
         try {
             String username = req.getParameter("username");
             String password = req.getParameter("password");

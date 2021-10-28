@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * This is the Cancel Servlet, which would have been used to cancel a flight if the user story was finished. As of right now
+ * this servlet does nothing.
+ */
+
 public class CancelServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException{

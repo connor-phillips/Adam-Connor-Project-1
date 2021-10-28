@@ -19,6 +19,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This is the Ticket Servlet. This servlet takes a POST request and updates the user's ticket based upon whether
+ * they want to either check in to their flight or cancel.
+ */
+
 public class TicketServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException{
@@ -31,7 +36,7 @@ public class TicketServlet extends HttpServlet {
             String jsonText = sc.useDelimiter("\\A").next();
             ObjectMapper mapper = new ObjectMapper();
             Ticket ticket = mapper.readValue(jsonText, Ticket.class);
-
+            //Update the ticket based upon the request
             Ticket updatedTicket = TicketService.updateTicket(ticket);
             String jsonString = mapper.writeValueAsString(updatedTicket);
 //            PrintWriter out = resp.getWriter();

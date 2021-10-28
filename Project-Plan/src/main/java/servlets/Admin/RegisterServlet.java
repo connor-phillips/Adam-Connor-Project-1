@@ -11,6 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * This is the Register Servlet. This servlet will retrieve the admin's First Name, Last Name, Username, and Password
+ * from the http request. It will create a new admin using these parameters and store them in the admin table.
+ */
+
 public class RegisterServlet extends HttpServlet {
 
     @Override

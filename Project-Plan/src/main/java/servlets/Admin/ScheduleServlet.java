@@ -13,6 +13,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+/**
+ * This is the Schedule Servlet. This Servlet is designed to schedule a new flight based upon the parameters sent
+ * in the HTTP Request. It will then create a new flight using these parameters and store them in the flight table.
+ */
+
 public class ScheduleServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
