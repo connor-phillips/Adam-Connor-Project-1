@@ -5,13 +5,14 @@
     <link rel="stylesheet" href="Styling.css">
     <style>
         form {
-            padding: 30px;
+            padding: 10px;
         }
 
         button {
             position: relative;
             top: 15px;
         }
+
     </style>
     <meta charset="UTF-8">
     <title>Flight Search</title>
@@ -25,11 +26,11 @@
         <table>
             <thead>
                 <tr>
-                    <th>flight_num</th>
-                    <th>date</th>
-                    <th>destination</th>
-                    <th>origin</th>
-                    <th>time</th>
+                    <th>Flight_num</th>
+                    <th>Date</th>
+                    <th>Destination</th>
+                    <th>Origin</th>
+                    <th>Time</th>
                 </tr>
             </thead>
             <tbody id="flightsTable">
@@ -37,6 +38,9 @@
             </tbody>
         </table>
     </div>
+    <form action="BookFlight.html">
+        <button type="submit" name ="BookFlight">Book a Flight</button>
+    </form>
     <form action="MainMenu.html">
         <button type="submit" name="MainMenu">Main Menu</button>
     </form>

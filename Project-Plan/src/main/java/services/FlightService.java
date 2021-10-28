@@ -66,6 +66,14 @@ public class FlightService {
         return session.createQuery(query).getSingleResult();
     }
 
+    public static Flight getFlightByID(int flight){
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Flight> query = builder.createQuery(Flight.class);
+        Root<Flight> root = query.from(Flight.class);
+        query.select(root).where(builder.equal(root.get("flight_num"), flight));
+        return session.createQuery(query).getSingleResult();
+    }
+
     public static List<Flight> getFlightByDetails(Flight flight){
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Flight> query = builder.createQuery(Flight.class);
