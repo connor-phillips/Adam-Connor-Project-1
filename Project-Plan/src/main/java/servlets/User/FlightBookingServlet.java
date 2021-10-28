@@ -5,9 +5,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Models.*;
+import org.json.JSONObject;
 import services.TicketService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import utils.FileLogger;
+
 
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
@@ -33,13 +35,14 @@ public class FlightBookingServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp){
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         InputStream requestBody = req.getInputStream();
         Scanner sc = new Scanner(requestBody, StandardCharsets.UTF_8.name());
-        String json = sc.useDelimiter("\\A").next();
-        System.out.println(json);
-        ObjectMapper mapper = new ObjectMapper();
-        
+        String json = sc.next();
+        JSONObject jsonObject = new JSONObject(json);
+        int flight_num = jsonObject.getInt("flight_num");
+        String first_name = jsonObject.getString("first_name");
+        String last_name = jsonObject.getString("last_name");
         //Ticket ticket = mapper.readValue(json, Ticket.class);
         //TicketService.purchaseTicket(ticket);
         resp.setStatus(202);

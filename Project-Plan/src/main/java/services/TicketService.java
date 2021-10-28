@@ -37,25 +37,25 @@ public class TicketService {
 
     public static void purchaseTicket(Integer flight_num, String first_name, String last_name) {
         Ticket ticket = new Ticket();
-        Transaction t = session.beginTransaction();
         ticket.setFirst_name(first_name);
         ticket.setLast_name(last_name);
         ticket.setCancel(false);
         ticket.setCheckIn(false);
         ticket.setFlight(FlightService.getFlightByID(flight_num));
         ticket.setUser(UserService.createUser(first_name, last_name));
+        Transaction t = session.beginTransaction();
         session.save(ticket);
         t.commit();
     }
     public static void addTicket(Integer flight_num, String first_name, String last_name){
         Ticket ticket = new Ticket();
-        Transaction t = session.beginTransaction();
         ticket.setFirst_name(first_name);
         ticket.setLast_name(last_name);
         ticket.setCancel(false);
         ticket.setCheckIn(false);
         ticket.setFlight(FlightService.getFlightByID(flight_num));
         ticket.setUser(UserService.getCustomerByNames(first_name, last_name));
+        Transaction t = session.beginTransaction();
         session.save(ticket);
         t.commit();
     }
