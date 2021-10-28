@@ -37,11 +37,11 @@ public class FlightService {
 
     public static void populateFlightsTable(){
         List<Flight> flights = new LinkedList<>();
-        Flight flight1 = new Flight("New York City", "Los Angeles", "October 30", "12 PM", false);
-        Flight flight2 = new Flight("New York City", "Chicago", "November 3", "3 PM", false);
-        Flight flight3 = new Flight("New York City", "Miami", "October 29", "6 PM", false);
-        Flight flight4 = new Flight("New York City", "Houston", "October 26", "10 AM", false);
-        Flight flight5 = new Flight("New York City", "Atlanta", "November 1", "1 PM", false);
+        Flight flight1 = new Flight("New York City", "Los Angeles", "October 30", "12 PM");
+        Flight flight2 = new Flight("New York City", "Chicago", "November 3", "3 PM");
+        Flight flight3 = new Flight("New York City", "Miami", "October 29", "6 PM");
+        Flight flight4 = new Flight("New York City", "Houston", "October 26", "10 AM");
+        Flight flight5 = new Flight("New York City", "Atlanta", "November 1", "1 PM");
         flights.add(flight1);
         flights.add(flight2);
         flights.add(flight3);
@@ -106,33 +106,11 @@ public class FlightService {
         flightsCheck = session.createQuery(query).getResultList();
         if (flightsCheck.size() == 0){
             Transaction transaction = session.beginTransaction();
-            flight.setCancelled(false);
             session.save(flight);
             transaction.commit();
             alert = "New Flight Created";
         } else {
             alert = "This Flight already exists";
-        }
-        return alert;
-    }
-
-    public static String cancelFlight(Flight flight){
-        String alert;
-        List<Flight> checkFlight;
-        CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Flight> query = builder.createQuery(Flight.class);
-        Root<Flight> root = query.from(Flight.class);
-        query.select(root).where(builder.equal(root.get("flight_num"), flight.getFlight_num()));
-        checkFlight = session.createQuery(query).getResultList();
-        if (checkFlight.size() == 0) {
-            alert = "This flight does not exist";
-        } else {
-            Transaction transaction = session.beginTransaction();
-            Flight updatedFlight = session.load(Flight.class, flight.getFlight_num());
-            updatedFlight.setCancelled(flight.getCancelled());
-            session.save(updatedFlight);
-            transaction.commit();
-            alert = "Flight #" + updatedFlight.getFlight_num() + " has been cancelled";
         }
         return alert;
     }

@@ -25,7 +25,7 @@
 
     <script>
         (async function getPassengers() {
-            let response = await fetch("Adamconnorproject1-env.eba-mheey8pz.us-east-2.elasticbeanstalk.com/passengers");
+            let response = await fetch("http://localhost:8080/Project-Plan/passengers");
             let json = await response.json();
 
             let table = document.getElementById("FlightPassengers");

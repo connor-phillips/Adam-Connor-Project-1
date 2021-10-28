@@ -7,6 +7,7 @@ import services.TicketService;
 import services.UserService;
 import utils.FileLogger;
 
+import javax.persistence.NoResultException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -35,7 +36,6 @@ public class TicketsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException{
-        //int user_id = Integer.parseInt(req.getParameter("user_id"));
         try {
             InputStream requestBody = req.getInputStream();
             Scanner sc = new Scanner(requestBody, StandardCharsets.UTF_8.name());
@@ -43,8 +43,6 @@ public class TicketsServlet extends HttpServlet {
             ObjectMapper mapper = new ObjectMapper();
             User user = mapper.readValue(jsonText, User.class);
 
-            //User user = new User();
-            //user.setUser_id(user_id);
             System.out.println("DEBUG - user_id: " + user.getUser_id());
             user = UserService.getUserByID(user);
             System.out.println("DEBUG - user_id: " + user.getUser_id() + ", " + user.getFirst_name());
@@ -57,11 +55,10 @@ public class TicketsServlet extends HttpServlet {
                 PrintWriter out = resp.getWriter();
                 out.println("You have not purchased any tickets");
             } else {
-                //ObjectMapper mapper = new ObjectMapper();
                 resp.getWriter().write(mapper.writeValueAsString(tickets));
                 resp.setContentType("application/json");
             }
-        } catch(IOException e){
+        } catch(NoResultException | IOException e){
             FileLogger.getFileLogger().console().threshold(4).writeLog(e.toString(), 4);
         }
 

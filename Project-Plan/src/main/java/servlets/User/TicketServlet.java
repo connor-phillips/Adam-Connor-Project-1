@@ -7,6 +7,7 @@ import services.TicketService;
 import services.UserService;
 import utils.FileLogger;
 
+import javax.persistence.NoResultException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,16 +32,14 @@ public class TicketServlet extends HttpServlet {
             ObjectMapper mapper = new ObjectMapper();
             Ticket ticket = mapper.readValue(jsonText, Ticket.class);
 
-            System.out.println("DEBUG - ticketId: " + ticket.getTicket_id());
-            System.out.println("DEBUG - cancel: " + ticket.getCancel());
-            System.out.println("DEBUG - checkIn: " + ticket.getCheckIn());
             Ticket updatedTicket = TicketService.updateTicket(ticket);
-            System.out.println("DEBUG - Ticket: " + updatedTicket.getTicket_id() + " " + updatedTicket.getLast_name() + " " + updatedTicket.getFlight());
             String jsonString = mapper.writeValueAsString(updatedTicket);
-            System.out.println("DEBUG - Updated Ticket: " + jsonString);
-            resp.getWriter().write(mapper.writeValueAsString(updatedTicket));
+            PrintWriter out = resp.getWriter();
+            int id = updatedTicket.getTicket_id();
+            out.println(id);
+            //resp.getWriter().write(mapper.writeValueAsString(updatedTicket));
             resp.setContentType("application/json");
-        } catch (IOException e){
+        } catch (NoResultException | IOException e){
             FileLogger.getFileLogger().console().threshold(4).writeLog(e.toString(), 4);
         }
     }

@@ -28,7 +28,7 @@
 
     <script>
         (async function retrieveFlights() {
-            let response = await fetch("Adamconnorproject1-env.eba-mheey8pz.us-east-2.elasticbeanstalk.com/test");
+            let response = await fetch("http://localhost:8080/Project-Plan/test");
             let json = await response.json();
             let table = document.getElementById("CitiesTable");
                 for (let element of json) {
